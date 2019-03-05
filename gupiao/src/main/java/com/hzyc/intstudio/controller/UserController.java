@@ -92,7 +92,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		boolean flag = userService.selectByTel(users,request);
-		String jsp = flag ? "redirect:homePage" : "redirect:loginorregist.jsp";
+		String jsp = flag ? "redirect:home.html" : "redirect:loginorregist.jsp";
 		
 		if (flag) {
 			try {

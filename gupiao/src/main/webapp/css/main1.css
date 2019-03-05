@@ -1,0 +1,495 @@
+html, body, p {
+  margin: 0;
+  padding: 0
+}
+* {
+  box-sizing: border-box;
+}
+body, html {
+  width: 100%;
+  height: 100%;
+}
+#login, #home, #my-head, #register, #detail, #res, #record {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#login .img-wrapper {
+  width: 100%;
+  height: 280px;
+}
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+#login .form-wrapper {
+  position: absolute;
+  top: 209px;
+  left: 10%;
+  width: 80%;
+  height: 350px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: #d5d0d0 0px 3px 25px 4px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+#login p {
+  font-size: 20px;
+  color: #1087ff;
+  text-align: center;
+  margin-top: 40px;
+}
+#login .footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  font-weight: 600;
+}
+#login .form {
+  margin-top: 30px;
+}
+#login .mint-cell-wrapper {
+  background-image: -webkit-linear-gradient(top, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(180deg, #fff, #fff 50%, transparent 50%);
+}
+#login .mint-cell:last-child {
+  background-image: -webkit-linear-gradient(top, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(180deg, #fff, #fff 50%, transparent 50%);
+}
+#login .mint-field .mint-cell-title {
+  width: 45px;
+}
+#login .mint-field .mint-cell-value {
+  border-bottom: 1px solid #d0d0d0;
+}
+.mint-cell-text {
+  font-size: 15px;
+}
+.mint-field-core {
+  font-size: 13px;
+}
+.login {
+  width: 100%;
+  background: #3191ff;
+  color: #fff;
+  height: 30px;
+  font-size: 14px;
+  margin-top: 46px;
+}
+.zhuce {
+  text-align: center;
+  /* color: #3191ff; */
+  margin-top: 20px;
+}
+.zhuce a {
+  color: #1087ff;
+}
+#home .head-img {
+  width: 100%;
+  height: 200px;
+}
+.head-img img {
+  width: 100%;
+  height: 100%;
+}
+#home .tip {
+  width: 100%;
+  height: 20px;
+  border: 1px solid #e0e0e0;
+  font-size: 12px;
+  display: flex;
+}
+.tip span {
+  display: inline-block;
+  margin: 0 10px 0 15px;
+}
+.tip span i {
+  color: #1087ff;
+  font-size: 13px;
+}
+#home .menu {
+  width: 100%;
+  height: auto;
+}
+.tabs {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid #e0e0e0;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+.tabs a {
+  text-decoration: none;
+  display: block;
+  width: 50%;
+  text-align: center;
+}
+.tabs span {
+  font-size: 14px;
+  color: #3191ff;
+}
+.tabs .iconfont {
+  font-size: 28px;
+  color: #3191ff;
+}
+.tabs .special {
+  font-size: 14px;
+  color: #9c9a9a;
+}
+.lists {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+.lists .item {
+  width: 33%;
+  text-align: center;
+}
+.item .wrapper {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin-bottom: 5px;
+  border-radius: 35%;
+}
+.wrapper img {
+  width: 90%;
+  height: 90%;
+}
+.item .iconfont {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+}
+.item .text {
+  font-size: 13px;
+}
+#home .box-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+.box-wrapper .box {
+  width: 50%;
+  text-align: center;
+}
+.box .img-box {
+  width: 120px;
+  height: 70px;
+  display: inline-block;
+}
+.box .img-box img {
+  width: 100%;
+  height: 100%;
+}
+#my .my-head {
+  position: relative;
+  width: 100%;
+  height: 252px;
+}
+#my {
+  background: #f2f3f7;
+}
+.my-head img {
+  width: 100%;
+  height: 100%;
+}
+#my .user {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  width: 170px;
+  text-align: center;
+  margin-left: -85px;
+}
+.user .user-img {
+  width: 105px;
+  height: 105px;
+  background: #fff;
+  border-radius: 100%;
+  margin-left: 33px;
+}
+.user p {
+  margin: 10px 0;
+  color: #fff;
+}
+#my .name {
+  font-size: 18px;
+}
+.list-wrapper {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  background: #fff;
+  align-items: center;
+}
+.list-wrapper .yuan {
+  width: 40%;
+  border-right: 1px solid #e0e0e0;
+  text-align: center;
+}
+.yuan span {
+  color: #7e7e7e;
+}
+.list-wrapper .chong {
+  width: 60%;
+  text-align: center;
+}
+.yuan .balance {
+  display: inline-block;
+  font-size: 25px;
+  color: #435ace;
+  font-weight: 600;
+  /* margin-bottom: 10px; */
+}
+.chong a {
+  display: inline-block;
+  width: 150px;
+  height: 52px;
+  text-decoration: none;
+}
+.chong a img {
+  width: 100%;
+  height: 100%;
+}
+.h-lists {
+  width: 100%;
+  margin-top: 5px;
+}
+#my .mint-cell  {
+  min-height: 52px;
+}
+#register, #res {
+  background: #f4f6fa;
+}
+#register .mintui {
+  font-size: 20px;
+}
+#register .form-wrapper {
+  position: relative;
+  background: #fff;
+  margin-top: 15px;
+  padding: 0 15px;
+}
+#register .mint-field  {
+  border-bottom: 1px solid #e0e0e0;
+}
+.attention {
+  padding: 0 15px;
+  font-size: 14px;
+  color: #868080;
+}
+.attention p {
+  margin-bottom: 5px;
+}
+.password .mint-field-clear {
+  display: none;
+}
+.password {
+  position: relative;
+}
+.form-wrapper .btn {
+  position: absolute;
+  top: 65px;
+  right: 28px;
+  color: #1087ff;
+  font-weight: bold;
+}
+.getBtn {
+  position: absolute;
+  bottom: 13px;
+  right: 28px;
+  font-size: 14px;
+}
+#detail .detail-wrapper {
+  width: 100%;
+  padding: 20px 15px;
+}
+.detail-wrapper h3 {
+  font-size: 20px;
+}
+#detail .btns {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+#detail .btns .mint-button--normal {
+  width: 45%;
+  margin: 0 10px;
+}
+.detail-list .item {
+  padding: 10px;
+}
+.result {
+  background: #fff;
+  width: 100%;
+  padding: 25px 0;
+  text-align: center;
+  margin-top: 2px;
+}
+.result i {
+  font-size: 60px;
+  color: #38b53d;
+}
+.result span {
+  display: inline-block;
+  margin-top: 10px;
+}
+.record-list {
+  background: #fff;
+  overflow: scroll;
+}
+.record-list .item {
+  padding: 15px 0;
+  border-bottom: 1px solid #f4f6fa;
+}
+.record-list .item .box {
+  position: relative;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.record-list .item .title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.record-list .item .data {
+  font-size: 13px;
+  color: #7d8492;
+  margin-top: 4px;
+}
+.record-list .item .rmb {
+  height: 48px;
+  text-align: center;
+  line-height: 48px;
+  font-size: 18px;
+}
+.recharge-box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px 0;
+}
+.recharge-box .item {
+  width: 33.3%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.recharge-box span {
+  display: inline-block;
+  color: #45bf6c;
+  border-radius: 10px;
+}
+.recharge-box .list {
+  width: 100px;
+  height: 65px;
+  line-height: 65px;
+  border: 2px solid #45bf6c;
+  text-align: center;
+}
+.biaojia {
+  font-size: 20px;
+  font-weight: 600;
+}
+.box1 {
+  background: -webkit-linear-gradient(#ff8d62, red); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ff8d62, red); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ff8d62, red); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ff8d62, red); /* 鏍囧噯鐨勮娉� */
+  
+}
+.box2 {
+  background: -webkit-linear-gradient(#ff8d62, #ffb506); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ff8d62, #ffb506); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ff8d62, #ffb506); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ff8d62, #ffb506); /* 鏍囧噯鐨勮娉� */
+}
+.box3 {
+  background: -webkit-linear-gradient(#147d94, #1acaff); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#147d94, #1acaff); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#147d94, #1acaff); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#147d94, #1acaff); /* 鏍囧噯鐨勮娉� */
+}
+.mint-swipe-indicator {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  opacity: 1;
+  background: #fff;
+}
+.mint-swipe-indicator.is-active {
+  background: #1087ff;
+}
+.mint-swipe-indicators {
+  /* left: 0; */
+  /* bottom: 2px;
+  right: -36px; */
+}
+
+#my .my-head {
+  position: relative;
+  width: 100%;
+  height: 240px;
+}
+#my .user {
+  position: absolute;
+  top: 54px;
+  left: 50.5%;
+  width: 170px;
+  text-align: center;
+  margin-left: -85px;
+}
+.user .user-img {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border-radius: 100%;
+  margin-left: 33px;
+}
+#my .name {
+  font-size: 17px;
+}
+.user p {
+  margin: 2px 0;
+  color: #fff;
+  font-size: 14px;
+}
+@media(max-width: 380px) {
+  #my .my-head {
+    height: 230px;
+  }
+  #my .user {
+    top: 50px;
+  }
+}
+@media (max-width : 330px) {
+  #my .my-head {
+    height: 215px;
+  }
+  #my .user {
+    top: 48px;
+    left: 52%;
+  }
+  .user .user-img {
+    width: 90px;
+    height: 90px;
+  }
+}
+
