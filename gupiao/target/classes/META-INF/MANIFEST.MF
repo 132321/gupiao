@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: gupiao
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: SHAOSHUAI
+Built-By: asus
 Implementation-Vendor-Id: com.hzyc.intstudio
-Build-Jdk: 1.8.0_66
+Build-Jdk: 1.8.0_131
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/gupiao
 Created-By: Maven Integration for Eclipse
