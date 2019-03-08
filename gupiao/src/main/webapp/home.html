@@ -1,108 +1,270 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<% List<MarketIndex> miList = (List<MarketIndex>)request.getAttribute("miList");%>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="./css/iconfont.css">
-<link rel="stylesheet" href="./css/iconfont1.css">
-<link rel="stylesheet" href="./css/iconfont2.css">
-<link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
-<link rel="stylesheet" href="./css/main1.css">
-<title>Document</title>
-<style>
-* {
-	margin: 0;
-	padding: 0
-}
-
-.gird {
-	width: 32%;
-	padding-top: 10px;
-	height: 100px;
-	border: 1px solid #eee;
-	display: inline-block;
-	margin-bottom: 10px;
-}
-
-.gird .name {
-	width: 100%;
-	text-align: center;
-	font-size: 17px;
-	color: #000;
-	margin-bottom: 5px;
-}
-
-.gird .price {
-	width: 100%;
-	text-align: center;
-	font-size: 18px;
-	color: #d00;
-}
-
-.gird .lv {
-	width: 100%; //
-	text-align: center;
-	font-size: 18px;
-	color: #d00;
-}
-
-.gird .lv .left {
-	width: 40%;
-	text-align: left;
-	font-size: 14px;
-	color: #d00;
-	display: inline-block;
-}
-
-.gird .lv .right {
-	width: 40%;
-	text-align: left;
-	font-size: 14px;
-	color: #d00;
-	display: inline-block;
-}
-
-.mint-header {
-	background-color: #e3e3e3;
-	margin-bottom: 20px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/iconfont.css">
+  <link rel="stylesheet" href="./css/iconfont1.css">
+  <link rel="stylesheet" href="./css/iconfont2.css">
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="./css/main1.css"> 
+  <title>Document</title>
+  <style>
+    *{
+    	margin:0;padding:0
+    }
+  	.gird{
+  		width:32%;
+  		padding-top:10px;
+  		height:100px;
+  		border:1px solid #eee;
+  		display:inline-block;
+  		margin-bottom:10px;
+  	}
+  	.gird .name{
+  		width:100%;
+  		text-align:center;
+  		font-size:17px;
+  		color:#000;
+  		margin-bottom:5px;
+  	}
+  	.gird .price{
+  		width:100%;
+  		text-align:center;
+  		font-size:18px;
+  		color:#d00;
+  	}
+  	.gird .lv{
+  		width:100%;
+  		//text-align:center;
+  		font-size:18px;
+  		color:#d00;
+  	}
+  	.gird .lv .left{
+  		width:40%;
+  		text-align:left;
+  		font-size:14px;
+  		color:#d00;
+  		
+  		display:inline-block;
+  	}
+  	.gird .lv .right{
+  		width:40%;
+  		text-align:left;
+  		font-size:14px;
+  		color:#d00;
+  		display:inline-block;
+  	}
+  	.mint-header {
+	 background-color: #1184f9;
+	 color:#fff;
+	 margin-bottom:20px;
+	}
+  </style>
 </head>
 <body>
-	<div id="home">
-		<mt-header title="首页"></mt-header>
-		<div style="width: 100%">
-		<%for(int i = 0;i<miList.size();i++){
-		%>
-			<div class="gird">
-				<div class="name">上证指数</div>
-				<div class="price">3309.10</div>
-				<div class="lv">
-					<div class="left">+47.85</div>
-					<div class="right">+1.57%</div>
-				</div>
-
+<div id="home">
+	<mt-header  title="首页"></mt-header>
+	<div style="width:100%">
+		 <span onclick="cancel()">
+      <mt-cell title="股票涨幅" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;margin-bottom:10px;"  >
+        <img slot="icon" src="./img/chongzhi.jpg" width="24" height="24" style="margin-right:15px;">
+      </mt-cell>
+      </span>
+		<div class="gird">
+			<div class="name">
+				上证指数
 			</div>
-			<%}%>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
 		</div>
-		<div style="height: 100px; width: 100%"></div>
-		<div class="tabs" style="background-color: #fff">
-			<a href="home.html"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
-			</a> <a href="hangqing.html"> <i class="iconfont"
-				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
-			</a> <a href="yuce.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
-				<span class="special">预测</span>
-			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
-				<span class="special">我的</span>
-			</a>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
+		</div>
+		<div class="gird">
+			<div class="name">
+				上证指数
+			</div>
+			<div class="price">
+				3309.10
+			</div>
+			<div class="lv">
+				<div class="left">+47.85</div>
+				<div class="right">+1.57%</div>
+			</div>
+		
 		</div>
 	</div>
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
-	<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
-	<script src="./js/home.js"></script>
+	<div style="height:100px;width:100%">
+	</div>
+  <div class="tabs" style="background-color:#fff">
+    <a href="home.html">
+      <i class="iconfont">&#xe73e;</i></br>
+      <span>首页</span>
+    </a>
+    <a href="hangqing.html">
+      <i class="iconfont" style="color: #9c9a9a;">&#xe682;</i></br>
+      <span class="special">行情</span>
+    </a>
+    <a href="yuce.html">
+      <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
+      <span class="special">预测</span>
+    </a>
+    <a href="my.html">
+      <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
+      <span class="special">我的</span>
+    </a>
+  </div>
+</div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script src="./js/home.js"></script>
 </body>
 </html>

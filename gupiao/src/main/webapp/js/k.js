@@ -1,12 +1,8 @@
 var vm = new Vue({
-  el: '#my',
+  el: '#k',
   data() {
     return {
-      name: '默认',
-      id: 'Tmfnnfknkjk',
-      rmb: '0',
-      userlogo:'img/cat.jpg',
-      errorImg: 'this.src="img/cat.jpg"'
+    	active: 'tab-container1'
     }
   },
   mounted(){
