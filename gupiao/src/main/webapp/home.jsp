@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%@page import="com.hzyc.intstudio.entity.MarketIndex"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <% List<MarketIndex> miList = (List<MarketIndex>)request.getAttribute("miList");%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<% List<MarketIndex> miList = (List<MarketIndex>)request.getAttribute("miList");%>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,7 +15,6 @@
 <link rel="stylesheet" href="./css/iconfont2.css">
 <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
 <link rel="stylesheet" href="./css/main1.css">
-<title>Document</title>
 <style>
 * {
 	margin: 0;
@@ -79,11 +81,11 @@
 		<%for(int i = 0;i<miList.size();i++){
 		%>
 			<div class="gird">
-				<div class="name">上证指数</div>
-				<div class="price">3309.10</div>
+				<div class="name"><%=miList.get(i).getName() %></div>
+				<div class="price"><%=miList.get(i).getPrice() %></div>
 				<div class="lv">
-					<div class="left">+47.85</div>
-					<div class="right">+1.57%</div>
+					<div class="left"><%=miList.get(i).getPoints() %></div>
+					<div class="right"><%=miList.get(i).getRate() %>%</div>
 				</div>
 
 			</div>

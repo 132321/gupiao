@@ -1,14 +1,24 @@
 package com.hzyc.intstudio.entity;
 
+import java.text.DecimalFormat;
+
 public class MarketIndex {
 
 	//指数名称，当前点数，当前价格，涨跌率，成交量（手），成交额（万元）；
+	private String id = "";
 	private String name ="";
 	private String points = "";
 	private String price = "";
 	private String rate = "";
 	private String volume = "";
 	private String turnVolume = "";
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -16,7 +26,8 @@ public class MarketIndex {
 		this.name = name;
 	}
 	public String getPoints() {
-		return points;
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(Double.parseDouble(points));
 	}
 	public void setPoints(String points) {
 		this.points = points;
@@ -28,7 +39,8 @@ public class MarketIndex {
 		this.price = price;
 	}
 	public String getRate() {
-		return rate;
+		DecimalFormat df = new DecimalFormat("0.00");
+		return df.format(Double.parseDouble(rate));
 	}
 	public void setRate(String rate) {
 		this.rate = rate;

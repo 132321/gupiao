@@ -43,11 +43,14 @@ public class StockDataImpl {
 	                //拆分的中间值
 	                String data = "";
 	                for(int i = 0;i<temp.length-1;i++) {
+	                	//截取股票代码
+	                	String id = temp[i].substring(temp[i].lastIndexOf("_")+1, temp[i].lastIndexOf("="));
 	                	//截取数据
 	                	data = temp[i].substring(temp[i].indexOf("\"")+1, temp[i].lastIndexOf("\""));
 	                	if(!data.equals("")) {
 	                		String[] temp2 = data.split(",");
 		                	MarketIndex mi = new MarketIndex();
+		                	mi.setId(id);
 		                	mi.setName(temp2[0]);
 		                	mi.setPoints(temp2[1]);
 		                	mi.setPrice(temp2[2]);

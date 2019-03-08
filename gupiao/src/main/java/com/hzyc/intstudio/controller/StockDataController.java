@@ -1,15 +1,11 @@
 package com.hzyc.intstudio.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.hzyc.intstudio.entity.MarketIndex;
 import com.hzyc.intstudio.service.StockDataImpl;
 import com.hzyc.intstudio.util.JDBCTools;
@@ -23,9 +19,12 @@ public class StockDataController {
 	//获取数据
 	@RequestMapping("/getAllData")
 	public String getData(HttpServletRequest request,Integer page) {
+		if(page ==null) {
+			page = 1;
+		}
 		Integer pageSize = 20;
 		JDBCTools jt = new JDBCTools();
-		String sql = "select * from table limit "+(page-1)*pageSize+","+pageSize;
+		String sql = "select * from stock limit "+(page-1)*pageSize+","+pageSize;
 		List<HashMap<String,String>> stockList = jt.find(sql);
 		StockDataImpl stockDataImpl = new StockDataImpl();
 		String stockId = "";
@@ -40,8 +39,7 @@ public class StockDataController {
 		}
 		List<MarketIndex> miList = stockDataImpl.getData(stockId);
 		request.setAttribute("miList", miList);
-		request.setAttribute("page", page+1);
-		return "";
+		return "home.jsp";
 	}
 	
 }
