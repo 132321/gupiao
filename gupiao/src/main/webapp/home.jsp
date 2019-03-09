@@ -96,7 +96,7 @@
 			<a href="home.html"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
 			</a> <a href="hangqing.html"> <i class="iconfont"
 				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
-			</a> <a href="yuce.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
+			</a> <a href="yuCe.jsp"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
 				<span class="special">预测</span>
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
 				<span class="special">我的</span>
