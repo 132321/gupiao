@@ -20,9 +20,9 @@
       </a>
     </mt-header>
     <div class="nav">
-  	  <mt-button size="small" onclick="test1()">换一拨</mt-button>
-      <mt-button size="small" onclick="test1()">股票查询</mt-button>
-      <mt-button size="small" onclick="test1()">月图</mt-button>
+    	<a href="yuCe.jsp" slot="left">
+  	  <mt-button size="small">换一拨</mt-button>
+  	  </a>
     </div>
     <div class="record-list" :style="{height:curHeight}">
     <span style="visibility:hidden;color:red;margin-left:20px;" id="noJL">无！</span>
@@ -55,12 +55,13 @@
       },
       mounted() {
     	  var vm = this;
+    	  var page = Math.ceil(Math.random()*10 + Math.random()*10);
         var h = document.documentElement.clientHeight || document.body.clientHeight;
         var ajax = new XMLHttpRequest();
    	 ajax.open('post', '/yuCe' );
    	 ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
    	//发送请求
-   	 ajax.send(null);
+   	 ajax.send("page=" + page);
    	 ajax.onreadystatechange = function () {
             if(ajax.readyState==4 && ajax.status==200){
    		    var result = (ajax.responseText);
@@ -81,38 +82,6 @@
 
       }
     })
-  </script>
-   <script type="text/javascript">
-   
-   	function test1() {
-   		var vm = this;
-   		var page = Math.ceil(Math.random()*10 + Math.random()*10);
-        var h = document.documentElement.clientHeight || document.body.clientHeight;
-        var ajax = new XMLHttpRequest();
-	   	 ajax.open('post', '/yuCe' );
-	   	 ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	   	//发送请求
-	   	 ajax.send("page=" + page);
-	   	 ajax.onreadystatechange = function () {
-	            if(ajax.readyState==4 && ajax.status==200){
-	   		    var result = (ajax.responseText);
-	   		   
-	   		 	var obj = eval('('+result+')');
-	   		 	if (obj == '') {
-			 		document.getElementById("noJL").style.visibility = 'visible';
-			 	} else {
-			 		vm.lists = obj;
-			 	}
-	   		 	
-	   		 	
-	   		 }
-	   	}
-   	}
-  
-  window.onload = function(){
-	
-  }
-  
   </script>
 </body>
 </html>
