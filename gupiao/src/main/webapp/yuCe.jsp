@@ -8,13 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/iconfont1.css">
+  <link rel="stylesheet" href="./css/iconfont3.css">
   <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
   <link rel="stylesheet" href="./css/main1.css"> 
   <title>Document</title>
 </head>
 <body>
   <div id="record">
-    <mt-header title="充值记录" style="background:#f4f6fa;color:#000;height:50px;">
+    <mt-header title="股票预测" style="background:#f4f6fa;color:#000;height:50px;">
       <a href="getAllData" slot="left"></router-link>
         <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
       </a>
@@ -25,18 +26,21 @@
   	  </a>
     </div>
     <div class="record-list" :style="{height:curHeight}">
-    <span style="visibility:hidden;color:red;margin-left:20px;" id="noJL">无！</span>
+    <span style="visibility:hidden;color:red;margin-left:20px;" id="noJL">请在换一拨！</span>
       <div class="item" v-for="(item, index) in lists" :key="index">
         <div class="box">
           <div>
             <div class="title">名称:{{ item.name }}</div><br>
             <div class="data">代码:{{ item.code }}</div>
           </div>
-          <div class="item" v-if=" item.yuce  > 0" >
-           		<div class="rmb" style="color:#f00">+{{ item.yuce }}</div>
+          <div class="item" v-if=" item.yuce  > 0 && item.yuce < 1" >
+           		<div class="title" style="color:#f00">预计上升:+{{ item.yuce }}</div>
+           </div>
+          <div class="item" v-if=" item.yuce  >= 1" >
+           		<div class="rmb" style="color:#f00">建议购买:+{{ item.yuce }}<i class="iconfont" style="color: #9c9a9a;">&#xe73a;</i></div>
            </div>
            <div class="item" v-if=" item.yuce  <= 0" >
-           		<div class="rmb" style="color:#0f0">{{ item.yuce }}</div>
+           		<div class="title" style="color:#0f0">预计下降:{{ item.yuce }}</div>
            </div>
         </div>
       </div>

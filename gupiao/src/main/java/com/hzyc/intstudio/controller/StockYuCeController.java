@@ -31,7 +31,6 @@ public class StockYuCeController {
 	@ResponseBody
 	@RequestMapping(value="/yuCe")
 	public List<YuCe> getData(HttpServletRequest request,Integer page) {
-		String test = request.getParameter("test");
 		if(page ==null) {
 			page = 1;
 		}
@@ -57,7 +56,6 @@ public class StockYuCeController {
 			}
 			yuList.add(yuCe);
 		}
-		
 		List<YuCe> yList = new ArrayList<YuCe>();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     	Date date = new Date();
@@ -67,61 +65,86 @@ public class StockYuCeController {
         
 		yList = diaoyong(sdf.format(today), sdf.format(date), stockId, yuList);
 		
+		if (yList == null) {
+			sql = "select * from stock limit 0,"+pageSize;
+			stockList = jt.find(sql);
+			stockId = "";
+			
+			yuList = new ArrayList<YuCe>();
+			
+			//循环拼接数据
+			for(int i = 0;i<stockList.size();i++) {
+				YuCe yuCe = new YuCe();
+				if(i == stockList.size()-1) {
+					stockId = stockId + "cn_" + stockList.get(i).get("code");
+					yuCe.setCode("cn_" + stockList.get(i).get("code"));
+					yuCe.setName(stockList.get(i).get("name"));
+				}else {
+					stockId = stockId + "cn_" + stockList.get(i).get("code")+",";
+					yuCe.setCode("cn_" + stockList.get(i).get("code"));
+					yuCe.setName(stockList.get(i).get("name"));
+				}
+				yuList.add(yuCe);
+			}
+	        
+			yList = diaoyong(sdf.format(today), sdf.format(date), stockId, yuList);
+		}
+		
 		return yList;
 	}
 	
 	public static List<YuCe> diaoyong(String start, String end, String code, List<YuCe> yuList) {
 		URL ur = null;
 		List<YuCe> yList = new ArrayList<YuCe>();
+		String line;
+		BufferedReader reader = null;
 		try {
 			ur = new URL("http://q.stock.sohu.com/hisHq?code=" + code + "&start=" + start + "&end=" + end + "&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp");
             HttpURLConnection uc = (HttpURLConnection) ur.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(ur.openStream(),"GBK"));
-            String line;
-            while((line = reader.readLine()) != null){
-                
-            	String result = line.substring(line.indexOf("[") + 1,line.lastIndexOf("]"));
-                System.out.println(result);
-            	if (!"".equals(result)) {
-            		String[] resultArray = result.split("\\},\\{");
-                    int length = resultArray.length - 1;
-                    for (int i=0; i<length + 1; i++) {
-                    	String rs = "";
-                    	if (resultArray.length != 1) {
-                    		//结尾
-                        	if (i == length) {
-                        		rs = "{" + resultArray[i];
-                        	} else if (i != 0 && i != length) {
-                        		//中间
-                        		rs = "{" + resultArray[i] + "}";
-                        	} else {
-                        		//开头
-                        		rs = resultArray[i] + "}";
-                        	}
-                    	} else {
-                    		rs = resultArray[i];
-                    	}
-                    	JSONObject json = JSONObject.fromObject(rs);
-                    	JSONArray array = json.getJSONArray("stat");
-                    	YuCe e = new YuCe();
-                    	code = json.getString("code");
-                    	
-                    	for (YuCe yuCe : yuList) {
-                    		if (code.equals(yuCe.getCode())) {
-                    			e.setName(yuCe.getName());
-                    			yuList.remove(yuCe);
-                    			break;
-                    		}
-                    	}
-                    	e.setCode(code);
-                    	e.setYuce(array.get(2).toString());
-                    	yList.add(e);
-                    }
-            	}
-            }
+            reader = new BufferedReader(new InputStreamReader(ur.openStream(),"GBK"));
+            while ((line = reader.readLine()) != null) {
+
+				String result = line.substring(line.indexOf("[") + 1, line.lastIndexOf("]"));
+				if (!"".equals(result)) {
+					String[] resultArray = result.split("\\},\\{");
+					int length = resultArray.length - 1;
+					for (int i = 0; i < length + 1; i++) {
+						String rs = "";
+						if (resultArray.length != 1) {
+							//结尾
+							if (i == length) {
+								rs = "{" + resultArray[i];
+							} else if (i != 0 && i != length) {
+								//中间
+								rs = "{" + resultArray[i] + "}";
+							} else {
+								//开头
+								rs = resultArray[i] + "}";
+							}
+						} else {
+							rs = resultArray[i];
+						}
+						JSONObject json = JSONObject.fromObject(rs);
+						JSONArray array = json.getJSONArray("stat");
+						YuCe e = new YuCe();
+						code = json.getString("code");
+
+						for (YuCe yuCe : yuList) {
+							if (code.equals(yuCe.getCode())) {
+								e.setName(yuCe.getName());
+								yuList.remove(yuCe);
+								break;
+							}
+						}
+						e.setCode(code);
+						e.setYuce(array.get(2).toString());
+						yList.add(e);
+					}
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			return null;
 		}
 		return yList;
 	}
