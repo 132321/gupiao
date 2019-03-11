@@ -1,5 +1,9 @@
 package com.hzyc.intstudio.entity;
 
+/**
+ * @author asus
+ *
+ */
 public class Users {
     private String id;
 
@@ -17,7 +21,17 @@ public class Users {
 
     private String wechat;
 
-    public String getId() {
+    private String money;
+    
+    public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+	public String getId() {
         return id;
     }
 

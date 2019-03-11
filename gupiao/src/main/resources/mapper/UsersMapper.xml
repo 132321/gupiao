@@ -132,4 +132,7 @@
     from users
     where tel = #{tel,jdbcType=VARCHAR}
   </select>
+  <update id="rechange" parameterType="com.hzyc.intstudio.entity.Users">
+  	update users set money = #{money} where id = #{id}
+  </update>
 </mapper>

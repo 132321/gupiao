@@ -36,4 +36,6 @@ public interface IUserService {
 	 * @return flag
 	 */
 	public boolean selectTel(String tel);
+	
+	public int rechange(Users users);
 }

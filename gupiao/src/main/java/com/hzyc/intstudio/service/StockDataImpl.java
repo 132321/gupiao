@@ -12,6 +12,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
 
 import com.hzyc.intstudio.entity.MarketIndex;
+import com.hzyc.intstudio.entity.StockData;
 
 @Service
 public class StockDataImpl {
@@ -73,5 +74,85 @@ public class StockDataImpl {
 	            e.printStackTrace();
 	        }
 		 return miList;
+	}
+	
+	
+	/**
+	 * 查询股票的数据，封装在实体里
+	 * @param stockId
+	 * @return
+	 */
+	public StockData getStockData(String stockId) {
+		String url = "http://hq.sinajs.cn/list=sh"+stockId;
+		StockData sd = new StockData();
+		try {
+	            CloseableHttpClient client = null;
+	            CloseableHttpResponse response = null;
+	            try {
+	            	//获取连接
+	                HttpGet httpGet = new HttpGet(url);
+	                client = HttpClients.createDefault();
+	                response = client.execute(httpGet);
+	                //得到实体
+	                HttpEntity entity = response.getEntity();
+	                String result = EntityUtils.toString(entity);
+	                //通过;拆分数据
+	                String[] temp = result.split(";");
+	                //拆分的中间值
+	                String data = "";
+	                for(int i = 0;i<temp.length-1;i++) {
+	                	//截取股票代码
+	                	String id = temp[i].substring(temp[i].lastIndexOf("_")+1, temp[i].lastIndexOf("="));
+	                	//截取数据
+	                	data = temp[i].substring(temp[i].indexOf("\"")+1, temp[i].lastIndexOf("\""));
+	                	if(!data.equals("")) {
+	                		String[] temp2 = data.split(",");
+	                		sd.setName(temp2[0]);
+	                		sd.setKaipan(temp2[1]);
+	                		sd.setShoupan(temp2[2]);
+	                		sd.setCurrent(temp2[3]);
+	                		sd.setHighest(temp2[4]);
+	                		sd.setLowest(temp2[5]);
+	                		sd.setBuy(temp2[6]);
+	                		sd.setSell(temp2[7]);
+	                		sd.setNums(temp2[8]);
+	                		sd.setMoney(temp2[9]);
+	                		sd.setBuynum1(temp2[10]);
+	                		sd.setBuymoney1(temp2[11]);
+	                		sd.setBuynum2(temp2[12]);
+	                		sd.setBuymoney2(temp2[13]);
+	                		sd.setBuynum3(temp2[14]);
+	                		sd.setBuymoney3(temp2[15]);
+	                		sd.setBuynum4(temp2[16]);
+	                		sd.setBuymoney4(temp2[17]);
+	                		sd.setBuynum5(temp2[18]);
+	                		sd.setBuymoney5(temp2[19]);
+	                		sd.setSellnum1(temp2[20]);
+	                		sd.setSellmoney1(temp2[21]);
+	                		sd.setSellnum2(temp2[22]);
+	                		sd.setSellmoney2(temp2[23]);
+	                		sd.setSellnum3(temp2[24]);
+	                		sd.setSellmoney3(temp2[25]);
+	                		sd.setSellnum4(temp2[26]);
+	                		sd.setSellmoney4(temp2[27]);
+	                		sd.setSellnum5(temp2[28]);
+	                		sd.setSellmoney5(temp2[29]);
+	                		sd.setDate(temp2[30]);
+	                		sd.setTime(temp2[31]);
+	                	}
+	                }
+	                
+	            } finally {
+	                if (response != null) {
+	                    response.close();
+	                }
+	                if (client != null) {
+	                    client.close();
+	                }
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		 return sd;
 	}
 }

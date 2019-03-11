@@ -105,4 +105,9 @@ public class UserServiceImpl implements IUserService {
 		
 		return flag;
 	}
+
+	@Override
+	public int rechange(Users users) {
+		return userMapper.rechange(users);
+	}
 }

@@ -16,4 +16,6 @@ public interface UsersMapper {
     int updateByPrimaryKey(Users record);
     
     Users selectByTel(String tel);
+    
+    int rechange(Users users);
 }
