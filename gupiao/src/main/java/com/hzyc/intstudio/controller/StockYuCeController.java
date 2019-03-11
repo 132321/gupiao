@@ -7,6 +7,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,9 @@ public class StockYuCeController {
 	@ResponseBody
 	@RequestMapping(value="/yuCe")
 	public List<YuCe> getData(HttpServletRequest request,Integer page) {
+		
+		String day = request.getParameter("day");
+		
 		if(page ==null) {
 			page = 1;
 		}
@@ -59,8 +63,13 @@ public class StockYuCeController {
 		List<YuCe> yList = new ArrayList<YuCe>();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
     	Date date = new Date();
-    	Calendar calendar = Calendar.getInstance();  
-        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - 6);  
+    	Calendar calendar = Calendar.getInstance();
+    	if (!"".equals(day) && day != null) {
+    		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - Integer.parseInt(day) + 1);
+    	} else {
+    		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - 6);
+    	}
+          
         Date today = calendar.getTime(); 
         
 		yList = diaoyong(sdf.format(today), sdf.format(date), stockId, yuList);
@@ -89,6 +98,7 @@ public class StockYuCeController {
 	        
 			yList = diaoyong(sdf.format(today), sdf.format(date), stockId, yuList);
 		}
+		Collections.sort(yList);
 		
 		return yList;
 	}
@@ -144,6 +154,7 @@ public class StockYuCeController {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return null;
 		}
 		return yList;

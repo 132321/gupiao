@@ -23,13 +23,13 @@
       </a> -->
     </mt-header>
     <div class="nav">
-    	<a href="yuCe.jsp" slot="left">
+    	<a href="yuCe1.jsp" slot="left">
   	  <mt-button size="small">换一拨</mt-button>
+  	  </a>
     	<a href="yuCe.jsp" slot="left">
   	  <mt-button size="small">近7天</mt-button>
   	  </a>
-  	  </a>
-    	<a href="yuCe1.jsp" slot="left">
+  	  <a href="yuCe1.jsp" slot="left">
   	  <mt-button size="small">近15天</mt-button>
   	  </a>
     </div>
@@ -41,10 +41,13 @@
             <div class="title">名称:{{ item.name }}</div><br>
             <div class="data">代码:{{ item.code }}</div>
           </div>
-          <div class="item" v-if=" item.yuce  > 0 && item.yuce < 1" >
+          <div class="item" v-if=" item.yuce  > 0 && item.yuce < 2" >
            		<div class="title" style="color:#f00">预计上升:+{{ item.yuce }}</div>
            </div>
-          <div class="item" v-if=" item.yuce  >= 1" >
+          <div class="item" v-if=" item.yuce  >= 5" >
+           		<div class="rmb" style="color:#f00">涨停:+{{ item.yuce }}<i class="iconfont" style="color: #9c9a9a;">&#xe73a;&#xe73a;</i></div>
+           </div>
+          <div class="item" v-if=" item.yuce  >= 2 && item.yuce <5" >
            		<div class="rmb" style="color:#f00">建议购买:+{{ item.yuce }}<i class="iconfont" style="color: #9c9a9a;">&#xe73a;</i></div>
            </div>
            <div class="item" v-if=" item.yuce  == 0" >
@@ -88,7 +91,7 @@
    	 ajax.open('post', '/yuCe' );
    	 ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
    	//发送请求
-   	 ajax.send("page=" + page);
+   	 ajax.send("page=" + page + "&day=15");
    	 ajax.onreadystatechange = function () {
             if(ajax.readyState==4 && ajax.status==200){
    		    var result = (ajax.responseText);

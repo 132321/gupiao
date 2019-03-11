@@ -1,10 +1,19 @@
 package com.hzyc.intstudio.entity;
 
-public class YuCe {
+public class YuCe implements java.lang.Comparable<YuCe>{
 	
 	private String name;
 	private String code;
 	private String yuce;
+	
+	@Override
+    public int compareTo(YuCe yuCe) {
+        int result = 0;
+        //小数降序
+        result = - this.yuce.compareTo(yuCe.yuce);
+        return result;
+    }
+	
 	public String getName() {
 		return name;
 	}
