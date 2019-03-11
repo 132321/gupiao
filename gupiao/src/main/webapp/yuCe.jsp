@@ -7,7 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/iconfont.css">
   <link rel="stylesheet" href="./css/iconfont1.css">
+  <link rel="stylesheet" href="./css/iconfont2.css">
   <link rel="stylesheet" href="./css/iconfont3.css">
   <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
   <link rel="stylesheet" href="./css/main1.css"> 
@@ -16,9 +18,9 @@
 <body>
   <div id="record">
     <mt-header title="股票预测" style="background:#f4f6fa;color:#000;height:50px;">
-      <a href="getAllData" slot="left"></router-link>
+      <!-- <a href="getAllData" slot="left"></router-link>
         <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
-      </a>
+      </a> -->
     </mt-header>
     <div class="nav">
     	<a href="yuCe.jsp" slot="left">
@@ -45,6 +47,18 @@
         </div>
       </div>
     </div>
+    
+    <div class="tabs" style="background-color: #fff">
+			<a href="getAllData"> <i style="color: #9c9a9a;" class="iconfont">&#xe73e;</i></br> 
+			<span class="special">首页</span>
+			</a> <a href="hangqing.html"> <i class="iconfont"
+				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
+			</a> <a href="yuCe.jsp"> <i class="iconfont" >&#xe624;</i></br>
+				<span >预测</span>
+			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
+				<span class="special">我的</span>
+			</a>
+		</div>
   </div>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/mint-ui/lib/index.js"></script>

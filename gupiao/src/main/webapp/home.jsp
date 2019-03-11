@@ -68,7 +68,7 @@
 	}
   </style>
 </head>
-<body>
+<body style="height:auto">
 <div id="home">
 	<mt-header  title="首页"></mt-header>
 	<div style="width:100%">
@@ -90,9 +90,9 @@
 			</div>
 			<%}%>
 		</div>
-		<div style="height: 100px; width: 100%"></div>
+		<div style="height: 100px; width: 100%;background-color:#fff"></div>
 		<div class="tabs" style="background-color: #fff">
-			<a href="home.html"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
+			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
 			</a> <a href="hangqing.html"> <i class="iconfont"
 				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
 			</a> <a href="yuCe.jsp"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
