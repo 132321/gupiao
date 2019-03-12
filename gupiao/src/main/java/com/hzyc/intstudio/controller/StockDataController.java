@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.hzyc.intstudio.dao.OrdersMapper;
 import com.hzyc.intstudio.entity.MarketIndex;
 import com.hzyc.intstudio.entity.Orders;
+import com.hzyc.intstudio.entity.StockData;
 import com.hzyc.intstudio.entity.Users;
 import com.hzyc.intstudio.service.StockDataImpl;
 import com.hzyc.intstudio.util.JDBCTools;
@@ -68,6 +70,13 @@ public class StockDataController {
 		return stockList;
 	}
 	
+	/**
+	 * 买股票
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("buyStock")
 	public boolean buyStock(HttpServletRequest request) {
 		Users users  = (Users)request.getSession().getAttribute("users");
 		
@@ -113,5 +122,18 @@ public class StockDataController {
 		orders.setTimes(sdf.format(new Date()));
 		ordersMapper.insertSelective(orders);
 		return true;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getStockData")
+	public StockData getStockData(HttpServletRequest request) {
+		String stockId = request.getParameter("stockId");
+		
+		StockData sd = stockDataImpl.getStockData("sh"+stockId);
+		if(sd.getName()!=null && !sd.getName().equals("")) {
+			return sd;
+		}else {
+			return stockDataImpl.getStockData("sz"+stockId);
+		}
 	}
 }

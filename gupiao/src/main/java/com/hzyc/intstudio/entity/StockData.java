@@ -1,5 +1,8 @@
 package com.hzyc.intstudio.entity;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 /**
  * @author asus
  *
@@ -38,6 +41,7 @@ public class StockData {
 	private String sellmoney5;
 	private String date;
 	private String time;
+	DecimalFormat format = new DecimalFormat("0.00");
 	public String getName() {
 		return name;
 	}
@@ -99,13 +103,13 @@ public class StockData {
 		this.money = money;
 	}
 	public String getBuynum1() {
-		return buynum1;
+		return format.format(new BigDecimal(buynum1));
 	}
 	public void setBuynum1(String buynum1) {
 		this.buynum1 = buynum1;
 	}
 	public String getBuymoney1() {
-		return buymoney1;
+		return format.format(new BigDecimal(buymoney1));
 	}
 	public void setBuymoney1(String buymoney1) {
 		this.buymoney1 = buymoney1;
@@ -117,7 +121,7 @@ public class StockData {
 		this.buynum2 = buynum2;
 	}
 	public String getBuymoney2() {
-		return buymoney2;
+		return format.format(new BigDecimal(buymoney2));
 	}
 	public void setBuymoney2(String buymoney2) {
 		this.buymoney2 = buymoney2;
@@ -129,7 +133,7 @@ public class StockData {
 		this.buynum3 = buynum3;
 	}
 	public String getBuymoney3() {
-		return buymoney3;
+		return format.format(new BigDecimal(buymoney3));
 	}
 	public void setBuymoney3(String buymoney3) {
 		this.buymoney3 = buymoney3;
@@ -141,7 +145,7 @@ public class StockData {
 		this.buynum4 = buynum4;
 	}
 	public String getBuymoney4() {
-		return buymoney4;
+		return format.format(new BigDecimal(buymoney4));
 	}
 	public void setBuymoney4(String buymoney4) {
 		this.buymoney4 = buymoney4;
@@ -153,7 +157,7 @@ public class StockData {
 		this.buynum5 = buynum5;
 	}
 	public String getBuymoney5() {
-		return buymoney5;
+		return format.format(new BigDecimal(buymoney5));
 	}
 	public void setBuymoney5(String buymoney5) {
 		this.buymoney5 = buymoney5;
@@ -165,7 +169,7 @@ public class StockData {
 		this.sellnum1 = sellnum1;
 	}
 	public String getSellmoney1() {
-		return sellmoney1;
+		return format.format(new BigDecimal(sellmoney1));
 	}
 	public void setSellmoney1(String sellmoney1) {
 		this.sellmoney1 = sellmoney1;
@@ -177,7 +181,7 @@ public class StockData {
 		this.sellnum2 = sellnum2;
 	}
 	public String getSellmoney2() {
-		return sellmoney2;
+		return format.format(new BigDecimal(sellmoney2));
 	}
 	public void setSellmoney2(String sellmoney2) {
 		this.sellmoney2 = sellmoney2;
@@ -189,7 +193,7 @@ public class StockData {
 		this.sellnum3 = sellnum3;
 	}
 	public String getSellmoney3() {
-		return sellmoney3;
+		return format.format(new BigDecimal(sellmoney3));
 	}
 	public void setSellmoney3(String sellmoney3) {
 		this.sellmoney3 = sellmoney3;
@@ -201,7 +205,7 @@ public class StockData {
 		this.sellnum4 = sellnum4;
 	}
 	public String getSellmoney4() {
-		return sellmoney4;
+		return format.format(new BigDecimal(sellmoney4));
 	}
 	public void setSellmoney4(String sellmoney4) {
 		this.sellmoney4 = sellmoney4;
@@ -213,7 +217,7 @@ public class StockData {
 		this.sellnum5 = sellnum5;
 	}
 	public String getSellmoney5() {
-		return sellmoney5;
+		return format.format(new BigDecimal(sellmoney5));
 	}
 	public void setSellmoney5(String sellmoney5) {
 		this.sellmoney5 = sellmoney5;

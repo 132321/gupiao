@@ -83,7 +83,7 @@ public class StockDataImpl {
 	 * @return
 	 */
 	public StockData getStockData(String stockId) {
-		String url = "http://hq.sinajs.cn/list=sh"+stockId;
+		String url = "http://hq.sinajs.cn/list="+stockId;
 		StockData sd = new StockData();
 		try {
 	            CloseableHttpClient client = null;

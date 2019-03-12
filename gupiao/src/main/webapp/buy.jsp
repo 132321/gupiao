@@ -22,14 +22,19 @@
 
 .gird {
 	width: 70%;
-	padding-top: 10px;
 	height: 260px;
 	border: 1px solid #eee;
 	display: inline-block;
 	margin-bottom: 10px;
 	float: left;
 }
-
+.gird1 {
+	width: 60%;
+	height: 260px;
+	display: inline-block;
+	margin-bottom: 10px;
+	float: left;
+}
 .gird .name {
 	width: 100%;
 	text-align: center;
@@ -46,7 +51,7 @@
 }
 
 .gird .lv {
-	width: 100%; 
+	width: 100%;
 	text-align: center;
 	font-size: 18px;
 	color: #d00;
@@ -77,6 +82,20 @@
 .hr {
 	border: 1px dashed #0000fff;
 }
+.sell{
+	font-size : 14px;
+	width : 50px;
+	margin-left :10px;
+}
+#mai{
+	width:39%!important;
+}
+#mai div{
+	height:28px;
+	line-height:28px;
+	border-bottom:1px #e3e3e3 solid;
+	
+}
 </style>
 </head>
 <body>
@@ -88,31 +107,65 @@
 				<img slot="icon" src="./img/chongzhi.jpg" width="24" height="24"
 					style="margin-right: 15px;"> </mt-cell>
 			</span>
-			<div class="gird" onclick="javascript:location.href='k.jsp">
-				<mt-field label="股票名称" placeholder="输入编码" v-model="stockId"
-					@blur.native.capture="getData"></mt-field>
+			<div class="gird1" onclick="javascript:location.href='k.jsp">
+				<mt-popup v-model="popupVisible" position="bottom"></mt-popup>
+				<mt-field label="股票名称" placeholder="输入编码" v-model="stockId" 
+					@keyup.native="getData"></mt-field>
+				<mt-field label="金额" placeholder="输入金额" v-model="price" type="number"></mt-field>
+				<mt-field label="数量" placeholder="输入数量" v-model="num" type="number"></mt-field>
+				<mt-button type="primary" @click="buy" >买入</mt-button>
 			</div>
-			<div class="gird" style="width: 30%;">
-				卖5
-				<hr class="hr">
-				卖4
-				<hr class="hr">
-				卖3
-				<hr class="hr">
-				卖2
-				<hr class="hr">
-				卖1
-				<hr class="hr">
-				买1
-				<hr class="hr">
-				买2
-				<hr class="hr">
-				买3
-				<hr class="hr">
-				买4
-				<hr class="hr">
-				买5
-				<hr class="hr">
+			<div class="gird" id="mai" style="width: 30%;">
+				<div>
+				<span id="sell5" class="sell">卖5</span>
+				<span id="sellmoney5" class="sell">--</span>
+				<span id="sellmount5" class="sell">--</span>
+				</div>
+				<div>
+				<span id="sell4" class="sell">卖4</span>
+				<span id="sellmoney4" class="sell">--</span>
+				<span id="sellmount4" class="sell">--</span>
+				</div>
+				<div>
+				<span id="sell3" class="sell">卖3</span>
+				<span id="sellmoney3" class="sell">--</span>
+				<span id="sellmount3" class="sell">--</span>
+				</div>
+				<div>
+				<span id="sell2" class="sell">卖2</span>
+				<span id="sellmoney2" class="sell">--</span>
+				<span id="sellmount2" class="sell">--</span>
+				</div>
+				<div>
+				<span id="sell1" class="sell">卖1</span>
+				<span id="sellmoney1" class="sell">--</span>
+				<span id="sellmount1" class="sell">--</span>
+				</div>
+				<div>
+				<span id="buy1" class="sell">买1</span>
+				<span id="buymoney1" class="sell">--</span>
+				<span id="buymount1" class="sell">--</span>
+				</div>
+				<div>
+				<span id="buy2" class="sell">买2</span>
+				<span id="buymoney2" class="sell">--</span>
+				<span id="buymount2" class="sell">--</span>
+				</div>
+				<div>
+				<span id="buy3" class="sell">买3</span>
+				<span id="buymoney3" class="sell">--</span>
+				<span id="buymount3" class="sell">--</span>
+				</div>
+				<div>
+				<span id="buy4" class="sell">买4</span>
+				<span id="buymoney4" class="sell">--</span>
+				<span id="buymount4" class="sell">--</span>
+				</div>
+				<div>
+				<span id="buy5" class="sell">买5</span>
+				<span id="buymoney5" class="sell">--</span>
+				<span id="buymount5" class="sell">--</span>
+				</div>
 			</div>
 		</div>
 		<div style="height: 100px; width: 100%"></div>
@@ -126,6 +179,23 @@
 				<span class="special">我的</span>
 			</a>
 		</div>
+	
+	<template style="width:100%;height:300px;">
+	<div style="width:100%;height:300px;">
+		<!--分享弹出窗 begin-->
+		<mt-popup style="width:100%;height:300px;background-color:#fff" class="sharePopup" model="true"   popup-transition="popup-fade" v-model="popupVisible" position="bottom">
+		<div class="item" v-for="(item, index) in lists" :key="index">
+        <div class="box">
+          <div @click="returnCode(item.code)">
+            <div class="title" >名称:{{ item.name }}</div>
+            <div class="data">代码:{{ item.code }}</div><br>
+          </div>
+        </div>
+      </div>
+		</mt-popup>
+		<!--分享弹出窗 end-->
+	</div>
+	</template>
 	</div>
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 	<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
@@ -139,32 +209,16 @@ var vm = new Vue({
 	    	lists: [
 	       ],
 	      list: [
-	        {
-	          icon: 'jieshao.png',
-	          text: '厂区介绍',
-	          color: 'red'
-	        },
-	        {
-	          icon: 'chongzhi.png',
-	          text: '充值中心',
-	          color: 'green'
-	        },
-	        {
-	          icon: 'dingdanchaxun.png',
-	          text: '订单查询',
-	          color: 'yellow'
-	        },
-	        {
-	          icon: 'wuliuchaxun.png',
-	          text: '物流查询',
-	          color: 'blue'
-	        }
 	      ],
-		  news:''
+		  news:'',
+		  popupVisible :false,
+		  stockId:'',
+		  price:'',
+		  num:''
 	    }
 	  },
 	  methods: {
-		  getData(){
+		   getData(){
 			  var vm = this;
 			    var ajax3 = new XMLHttpRequest();
 				 ajax3.open('post', '/selNameByStockId' );
@@ -173,32 +227,84 @@ var vm = new Vue({
 				 ajax3.send("stockId="+this.stockId);
 				 ajax3.onreadystatechange = function () {
 			         if(ajax3.readyState==4 && ajax3.status==200){
-					    var flag2 = (ajax3.responseText);
-					    vm.lists = JSON.parse(flag2);
-					    alert(flag2);
-					  //  alert(1);
+			        	 var result = (ajax3.responseText);
+			    		 	var obj = eval('('+result+')');
+			    		 	if (obj == '') {
+			 		 	} else {
+			 		 		vm.lists = obj;
+			 		 	}
+			    		 	vm.popupVisible = true;
+					 }
+				 }
+		  },
+		  returnCode(x){
+			  this.stockId = x;
+			  var vm = this;
+			    var ajax4 = new XMLHttpRequest();
+			    ajax4.open('post', '/getStockData');
+			    ajax4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				//发送请求
+				 ajax4.send("stockId="+this.stockId);
+				 ajax4.onreadystatechange = function () {
+			         if(ajax4.readyState==4 && ajax4.status==200){
+			        	 var result = (ajax4.responseText);
+			    		 	var obj = eval('('+result+')');
+			    		if (obj == '') {
+			 		 	} else {
+			 		 		document.getElementById("sellmoney1").innerHTML = obj.sellmoney1;
+			 		 		document.getElementById("sellmoney2").innerHTML = obj.sellmoney2;
+			 		 		document.getElementById("sellmoney3").innerHTML = obj.sellmoney3;
+			 		 		document.getElementById("sellmoney4").innerHTML = obj.sellmoney4;
+			 		 		document.getElementById("sellmoney5").innerHTML = obj.sellmoney5;
+			 		 		
+			 		 		document.getElementById("sellmount1").innerHTML = obj.sellnum1;
+			 		 		document.getElementById("sellmount2").innerHTML = obj.sellnum2;
+			 		 		document.getElementById("sellmount3").innerHTML = obj.sellnum3;
+			 		 		document.getElementById("sellmount4").innerHTML = obj.sellnum4;
+			 		 		document.getElementById("sellmount5").innerHTML = obj.sellnum5;
+			 		 		
+			 		 		document.getElementById("buymoney1").innerHTML = obj.buymoney1;
+			 		 		document.getElementById("buymoney2").innerHTML = obj.buymoney2;
+			 		 		document.getElementById("buymoney3").innerHTML = obj.buymoney3;
+			 		 		document.getElementById("buymoney4").innerHTML = obj.buymoney4;
+			 		 		document.getElementById("buymoney5").innerHTML = obj.buymoney5;
+			 		 		
+			 		 		document.getElementById("buymount1").innerHTML = obj.sellnum1;
+			 		 		document.getElementById("buymount2").innerHTML = obj.sellnum2;
+			 		 		document.getElementById("buymount3").innerHTML = obj.sellnum3;
+			 		 		document.getElementById("buymount4").innerHTML = obj.sellnum4;
+			 		 		document.getElementById("buymount5").innerHTML = obj.sellnum5;
+			 		 	}
+					 }
+				 }
+				 this.popupVisible = false;
+		  },
+		  buy(){
+			  var vm = this;
+			    var ajax5 = new XMLHttpRequest();
+				 ajax5.open('post', '/buyStock');
+				 ajax5.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				//发送请求
+				 ajax5.send("stockId="+this.stockId+"&price="+this.price+"&num="+this.num);
+				 ajax5.onreadystatechange = function () {
+			         if(ajax5.readyState==4 && ajax5.status==200){
+			        	 var result = (ajax5.responseText);
+			    		 	var obj = eval('('+result+')');
+			    		 	alert(obj);
+			    		 	if (obj == '') {
+			 		 	} else {
+			 		 		vm.lists = obj;
+			 		 	}
 					 }
 				 }
 		  }
 	  },
+	 
 	  mounted(){
-		  var vm = this;
-		 
-		    var ajax3 = new XMLHttpRequest();
-			 ajax3.open('post', '/jzx/selImg1' );
-			 ajax3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			//发送请求
-			 ajax3.send(null);
-			 ajax3.onreadystatechange = function () {
-		         if(ajax3.readyState==4 && ajax3.status==200){
-				    var flag2 = (ajax3.responseText);
-				    vm.lists = JSON.parse(flag2);
-				  //  alert(1);
-				 }
-			 }
 	  }
 	  
-	})
+	});
+
 
 
 </script>
