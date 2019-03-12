@@ -89,12 +89,23 @@
 }
 #mai{
 	width:39%!important;
+	height: 260px;
+	border: 1px solid #eee;
+	border-bottom:0px;
+	display: inline-block;
+	margin-bottom: 10px;
+	float: left;
 }
 #mai div{
 	height:28px;
 	line-height:28px;
 	border-bottom:1px #e3e3e3 solid;
 	
+	
+}
+#mai div span{
+	font-size:13px;
+	color:#26a2ff;
 }
 </style>
 </head>
@@ -111,11 +122,11 @@
 				<mt-popup v-model="popupVisible" position="bottom"></mt-popup>
 				<mt-field label="股票名称" placeholder="输入编码" v-model="stockId" 
 					@keyup.native="getData"></mt-field>
-				<mt-field label="金额" placeholder="输入金额" v-model="price" type="number"></mt-field>
-				<mt-field label="数量" placeholder="输入数量" v-model="num" type="number"></mt-field>
-				<mt-button type="primary" @click="buy" >买入</mt-button>
+				<mt-field label="金额" placeholder="输入金额"  readonly v-model="price" ></mt-field>
+				<mt-field label="数量" placeholder="输入数量"  v-model="num" type="number"></mt-field>
+				<mt-button type="primary" style="width:150px;margin-top:20px;margin-left:30px;" @click="buy" >买入</mt-button>
 			</div>
-			<div class="gird" id="mai" style="width: 30%;">
+			<div  id="mai" style="width: 30%;">
 				<div>
 				<span id="sell5" class="sell">卖5</span>
 				<span id="sellmoney5" class="sell">--</span>
@@ -181,20 +192,21 @@
 		</div>
 	
 	<template style="width:100%;height:300px;">
-	<div style="width:100%;height:300px;">
+		<div style="width:100%;height:300px;">
 		<!--分享弹出窗 begin-->
 		<mt-popup style="width:100%;height:300px;background-color:#fff" class="sharePopup" model="true"   popup-transition="popup-fade" v-model="popupVisible" position="bottom">
 		<div class="item" v-for="(item, index) in lists" :key="index">
-        <div class="box">
-          <div @click="returnCode(item.code)">
-            <div class="title" >名称:{{ item.name }}</div>
-            <div class="data">代码:{{ item.code }}</div><br>
+        <div class="box"  @click="returnCode(item.code)">
+        
+        	<mt-cell :title="item.code" style="border-top: 1px solid #f2f3f7;padding: 0 10px;">
+	  			<span>{{item.name}}</span>
+		        <img slot="icon" src="./img/chongzhi.jpg" width="24" height="24" style="margin-right:15px;">
+		      </mt-cell>
           </div>
         </div>
       </div>
 		</mt-popup>
 		<!--分享弹出窗 end-->
-	</div>
 	</template>
 	</div>
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -214,7 +226,7 @@ var vm = new Vue({
 		  popupVisible :false,
 		  stockId:'',
 		  price:'',
-		  num:''
+		  num:'1'
 	    }
 	  },
 	  methods: {
@@ -227,19 +239,20 @@ var vm = new Vue({
 				 ajax3.send("stockId="+this.stockId);
 				 ajax3.onreadystatechange = function () {
 			         if(ajax3.readyState==4 && ajax3.status==200){
-			        	 var result = (ajax3.responseText);
-			    		 	var obj = eval('('+result+')');
-			    		 	if (obj == '') {
-			 		 	} else {
-			 		 		vm.lists = obj;
-			 		 	}
-			    		 	vm.popupVisible = true;
+			        	var result = (ajax3.responseText);
+		    		 	var obj = eval('('+result+')');
+		    		 	if (obj == '') {
+		 		 		} else {
+		 		 			vm.lists = obj;
+		 		 		}
+		    		 	vm.popupVisible = true;
 					 }
 				 }
 		  },
 		  returnCode(x){
+			 
 			  this.stockId = x;
-			  var vm = this;
+			 // var vm = this;
 			    var ajax4 = new XMLHttpRequest();
 			    ajax4.open('post', '/getStockData');
 			    ajax4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -251,6 +264,7 @@ var vm = new Vue({
 			    		 	var obj = eval('('+result+')');
 			    		if (obj == '') {
 			 		 	} else {
+			 		 		vm.price = (obj.current);
 			 		 		document.getElementById("sellmoney1").innerHTML = obj.sellmoney1;
 			 		 		document.getElementById("sellmoney2").innerHTML = obj.sellmoney2;
 			 		 		document.getElementById("sellmoney3").innerHTML = obj.sellmoney3;
@@ -274,10 +288,13 @@ var vm = new Vue({
 			 		 		document.getElementById("buymount3").innerHTML = obj.sellnum3;
 			 		 		document.getElementById("buymount4").innerHTML = obj.sellnum4;
 			 		 		document.getElementById("buymount5").innerHTML = obj.sellnum5;
+			 		 		
+			 		 		
+			 		 		
 			 		 	}
 					 }
 				 }
-				 this.popupVisible = false;
+				 this.popupVisible = false; 
 		  },
 		  buy(){
 			  var vm = this;
@@ -289,23 +306,19 @@ var vm = new Vue({
 				 ajax5.onreadystatechange = function () {
 			         if(ajax5.readyState==4 && ajax5.status==200){
 			        	 var result = (ajax5.responseText);
-			    		 	var obj = eval('('+result+')');
-			    		 	alert(obj);
-			    		 	if (obj == '') {
-			 		 	} else {
-			 		 		vm.lists = obj;
-			 		 	}
+			    		 	var obj = result;
+			    		 	if(obj == 'true'){
+			    		 		alert('购买成功!');
+			    		 		window.location.href="my.html";
+			    		 	}else{
+			    		 		alert('购买失败');
+			    		 	}
+				 		 	
 					 }
 				 }
 		  }
-	  },
-	 
-	  mounted(){
 	  }
 	  
 	});
-
-
-
 </script>
 </html>

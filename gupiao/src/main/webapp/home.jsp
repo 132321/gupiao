@@ -90,6 +90,10 @@
 			</div>
 			<%}%>
 		</div>
+		
+		<div style="width:90%;margin:0 auto">
+			<button style="width:100%;margin:0 auto;height:35px;color:#555;border:1px solid #00f;background-color:#fff;">加载更多</button>
+		</div>
 		<div style="height: 100px; width: 100%;background-color:#fff"></div>
 		<div class="tabs" style="background-color: #fff">
 			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
