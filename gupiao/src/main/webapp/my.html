@@ -44,9 +44,9 @@
     <div style="margin-top:10px;margin-bottom:10px;">
     	<div style="">
    		<a href="buy.jsp"><mt-button type="primary"  style="margin-left:20px;">买入</mt-button></a>
-		<mt-button type="default" style="margin-left:20px;">卖出</mt-button>
+		<a href="sell.jsp"><mt-button type="default" style="margin-left:20px;">卖出</mt-button></a>
 		<mt-button type="danger" style="margin-left:20px;">查询</mt-button>
-		<mt-button type="primary" style="margin-left:20px;">预测</mt-button>
+		<a href="yuCe.jsp"><mt-button type="primary" style="margin-left:20px;">预测</mt-button></a>
 		</div>
     </div>
    
@@ -57,18 +57,16 @@
      <!--  <mt-cell title="消费记录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="consumption()">
         <img slot="icon" src="./img/xiaofei.jpg" width="24" height="24" style="margin-right:15px;">
       </mt-cell> -->
-       <mt-cell to="/selOrders" title="我的购买" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
+       <mt-cell to="/selOrders1" title="我的购买" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
         <img slot="icon" src="./img/chaxun.jpg" width="24" height="24" style="margin-right:15px;">
       </mt-cell>
       
-      <mt-cell title="我的卖出" is-link to="updater" style="border-top: 1px solid #f2f3f7;padding: 0 10px;">
+      <mt-cell to="selOrders2" title="我的卖出" is-link to="updater" style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
         <img slot="icon" src="./img/xiugai.jpg" width="24" height="24" style="margin-right:15px;">
       </mt-cell>
-      <span onclick="cancel()">
-      <mt-cell title="交易记录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;"  >
+      <mt-cell to="selOrders" title="交易记录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;"  onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
         <img slot="icon" src="./img/tuichu.jpg" width="24" height="24" style="margin-right:15px;">
       </mt-cell>
-      </span>
       <span onclick="cancel()">
       <mt-cell title="退出登录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px; margin-bottom:66px;"  >
         <img slot="icon" src="./img/tuichu.jpg" width="24" height="24" style="margin-right:15px;">

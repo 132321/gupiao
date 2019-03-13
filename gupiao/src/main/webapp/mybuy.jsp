@@ -35,6 +35,11 @@
 </head>
 <body>
   <div id="mybuy">
+  <mt-header title="记录" style="background: #f4f6fa;color:#000;height:50px;">
+      <a href="getAllData" slot="left">
+        <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
+      </a>
+    </mt-header>
     <div class="h-Wlists">
     	<%
     	List<Orders> orders  = (List<Orders>)request.getAttribute("oList");
@@ -42,7 +47,7 @@
     		for(Orders o : orders){
       		%>
       			
-      		  <mt-cell title="<%=o.getStockid()%>-<%=o.getName()%>" is-link label="购买数量<%=o.getAmount()%>,单价<%=o.getPrice()%>,合计<%=o.getTotal()%>" style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
+      		  <mt-cell title="<%=o.getStockid()%>-<%=o.getName()%>" is-link label="数量<%=o.getAmount()%>,单价<%=o.getPrice()%>,合计<%=o.getTotal()%>" style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
 		        <img slot="icon" src="./img/chaxun.jpg" width="24" height="24" style="margin-right:15px;">
 		      </mt-cell>
       		

@@ -109,10 +109,7 @@
 }
 </style>
 </head>
-<%
-	String code = request.getParameter("code");
-%>
-<body onload="moren(<%=code%>)">
+<body>
 	<div id="home1">
 		<mt-header title="首页"></mt-header>
 		<div style="width: 100%">
@@ -121,8 +118,8 @@
 				<mt-field label="股票名称" placeholder="输入编码" v-model="stockId" 
 					@keyup.native="getData"></mt-field>
 				<mt-field label="金额" placeholder="输入金额"  readonly v-model="price" ></mt-field>
-				<mt-field label="数量" placeholder="输入数量"  v-model="num" type="number"></mt-field>
-				<mt-button type="primary" style="width:150px;margin-top:20px;margin-left:30px;" @click="buy" >买入</mt-button>
+				<mt-field label="数量" placeholder="输入数量"  v-model="num" type="number" @keyup.native="changeNum"></mt-field>
+				<mt-button type="primary" style="width:150px;margin-top:20px;margin-left:30px;" @click="buy" id="buy1" disabled>卖出</mt-button>
 			</div>
 			<div  id="mai" style="width: 30%;">
 				<div>
@@ -211,54 +208,6 @@
 	<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
 </body>
 <script>
-function moren(x){
-	if (x != null) {
-		this.stockId = x;
-		 // var vm = this;
-		    var ajax4 = new XMLHttpRequest();
-		    ajax4.open('post', '/getStockData');
-		    ajax4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			//发送请求
-			 ajax4.send("stockId="+this.stockId);
-			 ajax4.onreadystatechange = function () {
-		         if(ajax4.readyState==4 && ajax4.status==200){
-		        	 var result = (ajax4.responseText);
-		    		 	var obj = eval('('+result+')');
-		    		if (obj == '') {
-		 		 	} else {
-		 		 		vm.price = (obj.current);
-		 		 		vm.stockId = x;
-		 		 		document.getElementById("sellmoney1").innerHTML = obj.sellmoney1;
-		 		 		document.getElementById("sellmoney2").innerHTML = obj.sellmoney2;
-		 		 		document.getElementById("sellmoney3").innerHTML = obj.sellmoney3;
-		 		 		document.getElementById("sellmoney4").innerHTML = obj.sellmoney4;
-		 		 		document.getElementById("sellmoney5").innerHTML = obj.sellmoney5;
-		 		 		
-		 		 		document.getElementById("sellmount1").innerHTML = obj.sellnum1;
-		 		 		document.getElementById("sellmount2").innerHTML = obj.sellnum2;
-		 		 		document.getElementById("sellmount3").innerHTML = obj.sellnum3;
-		 		 		document.getElementById("sellmount4").innerHTML = obj.sellnum4;
-		 		 		document.getElementById("sellmount5").innerHTML = obj.sellnum5;
-		 		 		
-		 		 		document.getElementById("buymoney1").innerHTML = obj.buymoney1;
-		 		 		document.getElementById("buymoney2").innerHTML = obj.buymoney2;
-		 		 		document.getElementById("buymoney3").innerHTML = obj.buymoney3;
-		 		 		document.getElementById("buymoney4").innerHTML = obj.buymoney4;
-		 		 		document.getElementById("buymoney5").innerHTML = obj.buymoney5;
-		 		 		
-		 		 		document.getElementById("buymount1").innerHTML = obj.sellnum1;
-		 		 		document.getElementById("buymount2").innerHTML = obj.sellnum2;
-		 		 		document.getElementById("buymount3").innerHTML = obj.sellnum3;
-		 		 		document.getElementById("buymount4").innerHTML = obj.sellnum4;
-		 		 		document.getElementById("buymount5").innerHTML = obj.sellnum5;
-		 		 		
-		 		 		
-		 		 		
-		 		 	}
-				 }
-			 }
-	}
-}
 var vm = new Vue({
 	  el: '#home1',
 	  
@@ -279,7 +228,7 @@ var vm = new Vue({
 		   getData(){
 			  var vm = this;
 			    var ajax3 = new XMLHttpRequest();
-				 ajax3.open('post', '/selNameByStockId' );
+				 ajax3.open('post', '/selNameByStockIdBuy' );
 				 ajax3.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				//发送请求
 				 ajax3.send("stockId="+this.stockId);
@@ -296,6 +245,7 @@ var vm = new Vue({
 				 }
 		  },
 		  returnCode(x){
+			 
 			  this.stockId = x;
 			 // var vm = this;
 			    var ajax4 = new XMLHttpRequest();
@@ -344,7 +294,7 @@ var vm = new Vue({
 		  buy(){
 			  var vm = this;
 			    var ajax5 = new XMLHttpRequest();
-				 ajax5.open('post', '/buyStock');
+				 ajax5.open('post', '/sellStock');
 				 ajax5.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				//发送请求
 				 ajax5.send("stockId="+this.stockId+"&price="+this.price+"&num="+this.num);
@@ -353,10 +303,34 @@ var vm = new Vue({
 			        	 var result = (ajax5.responseText);
 			    		 	var obj = result;
 			    		 	if(obj == 'true'){
-			    		 		alert('购买成功!');
+			    		 		alert('卖出成功!');
 			    		 		window.location.href="my.html";
 			    		 	}else{
-			    		 		alert('购买失败');
+			    		 		alert('卖出失败');
+			    		 	}
+				 		 	
+					 }
+				 }
+		  },
+		  changeNum(){
+			  var vm = this;
+			    var ajax5 = new XMLHttpRequest();
+				 ajax5.open('post', '/maichu');
+				 ajax5.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				//发送请求
+				 ajax5.send("code="+this.stockId+"&num="+this.num);
+				 ajax5.onreadystatechange = function () {
+			         if(ajax5.readyState==4 && ajax5.status==200){
+			        	 var result = (ajax5.responseText);
+			    		 	var obj = result;
+			    		 	if(obj == 'true'){
+			    		 		//alert('数量不足');
+			    		 		document.getElementById("buy1").classList.remove("is-disabled");
+			    		 		document.getElementById("buy1").disabled = false;
+			    		 	}else{
+			    		 		alert('数量不足');
+			    		 		document.getElementById("buy1").classList.add("is-disabled");
+			    		 		document.getElementById("buy1").disabled = true;
 			    		 	}
 				 		 	
 					 }

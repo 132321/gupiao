@@ -89,6 +89,9 @@
     </trim>
   </insert>
   <select id="queryAll" parameterType="String" resultMap="SelResultMap">
-  	SELECT o.*,u.username,s.name FROM orders o,users u ,stock s WHERE u.id = o.userid AND s.code = o.stockid AND u.id =#{0} and o.status = #{1}
+  	SELECT o.*,u.username,s.name FROM orders o,users u ,stock s WHERE u.id = o.userid AND s.code = o.stockid AND u.id =#{0} and o.status in (#{1})
+  </select>
+  <select id="queryAll1" parameterType="String" resultMap="SelResultMap">
+  	SELECT o.*,u.username,s.name FROM orders o,users u ,stock s WHERE u.id = o.userid AND s.code = o.stockid AND u.id =#{0} and o.status in ('1','2')
   </select>
 </mapper>

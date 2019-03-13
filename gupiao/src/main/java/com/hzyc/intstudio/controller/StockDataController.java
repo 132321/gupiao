@@ -32,13 +32,15 @@ public class StockDataController {
 	
 	//获取数据
 	@RequestMapping("/getAllData")
-	public String getData(HttpServletRequest request,Integer page) {
+	public String getData(HttpServletRequest request) {
+		String page = request.getParameter("page");
 		if(page ==null) {
-			page = 1;
+			page = "2";
 		}
+		Integer page1 = Integer.parseInt(page);
 		Integer pageSize = 20;
 		JDBCTools jt = new JDBCTools();
-		String sql = "select * from stock limit "+(page-1)*pageSize+","+pageSize;
+		String sql = "select * from stock limit 0,"+(page1-1)*pageSize;
 		List<HashMap<String,String>> stockList = jt.find(sql);
 		StockDataImpl stockDataImpl = new StockDataImpl();
 		String stockId = "";
@@ -53,6 +55,7 @@ public class StockDataController {
 		}
 		List<MarketIndex> miList = stockDataImpl.getData(stockId);
 		request.setAttribute("miList", miList);
+		request.setAttribute("page", page1+1);
 		return "home.jsp";
 	}
 	
@@ -125,21 +128,52 @@ public class StockDataController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("selOrders")
-	public String selOrders(HttpServletRequest request){
+	@RequestMapping("selOrders1")
+	public String selOrders1(HttpServletRequest request){
 		Users users  = (Users)request.getSession().getAttribute("users");
 		List<Orders> oList = ordersMapper.queryAll(users.getId(),"1");
 		request.setAttribute("oList", oList);
 		return "mybuy.jsp";
 	}  
+	/**
+	 * 根据用户id查询订单
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("selOrders2")
+	public String selOrders2(HttpServletRequest request){
+		Users users  = (Users)request.getSession().getAttribute("users");
+		List<Orders> oList = ordersMapper.queryAll(users.getId(),"2");
+		request.setAttribute("oList", oList);
+		return "mybuy.jsp";
+	}  
 	
+	/**
+	 * 根据用户id查询订单
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("selOrders")
+	public String selOrders(HttpServletRequest request){
+		Users users  = (Users)request.getSession().getAttribute("users");
+		List<Orders> oList = ordersMapper.queryAll1(users.getId());
+		System.out.println(oList.size());
+		request.setAttribute("oList", oList);
+		return "mybuy.jsp";
+	}  
+	
+	@ResponseBody
 	@RequestMapping("sellStock")
 	public boolean sellStock(HttpServletRequest request) {
-        Users users  = (Users)request.getSession().getAttribute("users");
+		Users users  = (Users)request.getSession().getAttribute("users");
+		
 		String num = request.getParameter("num");
 		String price = request.getParameter("price");
 		String stockId = request.getParameter("stockId");
 		Orders orders = new Orders();
+		Double total = Double.parseDouble(price)*Integer.parseInt(num);
+		DecimalFormat format = new DecimalFormat("0.00");
+		orders.setTotal(format.format(total));
 		orders.setAmount(num);
 		orders.setUserid(users.getId());
 		orders.setStockid(stockId);
@@ -147,8 +181,22 @@ public class StockDataController {
 		orders.setStatus("2");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		orders.setTimes(sdf.format(new Date()));
-		ordersMapper.insertSelective(orders);
-		return true;
+		JDBCTools jt = new JDBCTools();
+		String sql1 = "select money from users where id = '"+users.getId()+"'";
+		String money  = jt.find(sql1).get(0).get("money");
+		double overMoney = Double.parseDouble(money) + total ;
+		String oMoneyString = format.format(Double.parseDouble(overMoney+""));
+		String sql = "update users set money ="+oMoneyString+" where id = '"+users.getId()+"'";
+		System.out.println(sql);
+		
+		int flag = jt.update(sql);
+		if(flag>0) {
+			ordersMapper.insertSelective(orders);
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 	@ResponseBody
@@ -162,5 +210,21 @@ public class StockDataController {
 		}else {
 			return stockDataImpl.getStockData("sz"+stockId);
 		}
+	}
+	
+	/**
+	 * 根据股票代码模糊查询已经购买的股票的名称
+	 * @param stockId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/selNameByStockIdBuy")
+	public List<HashMap<String,String>> selNameByStockIdBuy(HttpServletRequest request) {
+		String stockId = request.getParameter("stockId");
+		Users users  = (Users)request.getSession().getAttribute("users");
+		JDBCTools jt = new JDBCTools();
+		String sql = "SELECT * FROM stock s,orders o WHERE o.stockid = s.code AND o.userid = '"+users.getId()+"' AND s.code LIKE '%"+stockId+"%'";
+		List<HashMap<String,String>> stockList = jt.find(sql);
+		return stockList;
 	}
 }

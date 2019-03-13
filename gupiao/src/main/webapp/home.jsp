@@ -72,11 +72,6 @@
 <div id="home">
 	<mt-header  title="首页"></mt-header>
 	<div style="width:100%">
-		 <span onclick="cancel()">
-      <mt-cell title="股票涨幅" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;margin-bottom:10px;"  >
-        <img slot="icon" src="./img/chongzhi.jpg" width="24" height="24" style="margin-right:15px;">
-      </mt-cell>
-      </span>
 		<%for(int i = 0;i<miList.size();i++){
 		%>
 			<div class="gird" onclick="javascript:location.href='k.jsp?id=<%=miList.get(i).getId() %>' ">
@@ -92,7 +87,7 @@
 		</div>
 		
 		<div style="width:90%;margin:0 auto">
-			<button style="width:100%;margin:0 auto;height:35px;color:#555;border:1px solid #00f;background-color:#fff;">加载更多</button>
+			<button style="width:100%;margin:0 auto;height:35px;color:#555;border:1px solid #00f;background-color:#fff;" onclick="javascript:window.location.href=('getAllData?page=${page}')">加载更多</button>
 		</div>
 		<div style="height: 100px; width: 100%;background-color:#fff"></div>
 		<div class="tabs" style="background-color: #fff">
