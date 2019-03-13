@@ -1,5 +1,6 @@
 package com.hzyc.intstudio.controller;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -84,6 +85,9 @@ public class StockDataController {
 		String price = request.getParameter("price");
 		String stockId = request.getParameter("stockId");
 		Orders orders = new Orders();
+		Double total = Double.parseDouble(price)*Integer.parseInt(num);
+		DecimalFormat format = new DecimalFormat("0.00");
+		orders.setTotal(format.format(total));
 		orders.setAmount(num);
 		orders.setUserid(users.getId());
 		orders.setStockid(stockId);
@@ -91,8 +95,29 @@ public class StockDataController {
 		orders.setStatus("1");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		orders.setTimes(sdf.format(new Date()));
-		ordersMapper.insertSelective(orders);
-		return true;
+		JDBCTools jt = new JDBCTools();
+		String sql1 = "select money from users where id = '"+users.getId()+"'";
+		String money  = jt.find(sql1).get(0).get("money");
+		double overMoney = Double.parseDouble(money) - total ;
+		if(overMoney >= 0 ) {
+			//了可以
+			
+			String oMoneyString = format.format(overMoney);
+			String sql = "update users set money ="+oMoneyString+" where id = '"+users.getId()+"'";
+			System.out.println(sql);
+			
+			int flag = jt.update(sql);
+			if(flag>0) {
+				ordersMapper.insertSelective(orders);
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			//余额不足
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -100,15 +125,17 @@ public class StockDataController {
 	 * @param request
 	 * @return
 	 */
-	public List<Orders> selOrders(HttpServletRequest request){
+	@RequestMapping("selOrders")
+	public String selOrders(HttpServletRequest request){
 		Users users  = (Users)request.getSession().getAttribute("users");
-		List<Orders> oList = ordersMapper.queryAll(users.getId());
-		return oList;
-	}
+		List<Orders> oList = ordersMapper.queryAll(users.getId(),"1");
+		request.setAttribute("oList", oList);
+		return "mybuy.jsp";
+	}  
 	
+	@RequestMapping("sellStock")
 	public boolean sellStock(HttpServletRequest request) {
         Users users  = (Users)request.getSession().getAttribute("users");
-		
 		String num = request.getParameter("num");
 		String price = request.getParameter("price");
 		String stockId = request.getParameter("stockId");

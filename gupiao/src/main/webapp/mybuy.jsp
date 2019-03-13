@@ -34,8 +34,8 @@
   </script>
 </head>
 <body>
-  <div id="my">
-    <div class="h-lists">
+  <div id="mybuy">
+    <div class="h-Wlists">
     	<%
     	List<Orders> orders  = (List<Orders>)request.getAttribute("oList");
     	if(orders != null && orders.size() > 0 ){
@@ -52,27 +52,31 @@
     	
     	%>
       
-      </a>
-      <mt-cell title="我的卖出" is-link to="updater" style="border-top: 1px solid #f2f3f7;padding: 0 10px;">
-        <img slot="icon" src="./img/xiugai.jpg" width="24" height="24" style="margin-right:15px;">
-      </mt-cell>
-      <span onclick="cancel()">
-      <mt-cell title="交易记录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px;"  >
-        <img slot="icon" src="./img/tuichu.jpg" width="24" height="24" style="margin-right:15px;">
-      </mt-cell>
-      </span>
-      <span onclick="cancel()">
-      <mt-cell title="退出登录" is-link style="border-top: 1px solid #f2f3f7;padding: 0 10px; margin-bottom:66px;"  >
-        <img slot="icon" src="./img/tuichu.jpg" width="24" height="24" style="margin-right:15px;">
-      </mt-cell>
-      </span>
     </div>
    </div>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
   <script>
   
-  
+  var vm = new Vue({
+	  el: '#mybuy',
+	  
+	  data() {
+	    return {
+	    	lists: [
+	       ],
+	      list: [
+	      ],
+		  news:'',
+		  popupVisible :false,
+		  stockId:'',
+		  price:'',
+		  num:'1'
+	    }
+	  },
+	  methods: {
+	  }
+	});
   </script>
 </body>
 </html>

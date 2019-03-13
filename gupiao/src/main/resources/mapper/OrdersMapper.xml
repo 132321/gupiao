@@ -7,7 +7,7 @@
     <result column="stockid" property="stockid" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="VARCHAR" />
     <result column="times" property="times" jdbcType="VARCHAR" />
-    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
   </resultMap>
@@ -17,19 +17,20 @@
     <result column="stockid" property="stockid" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="VARCHAR" />
     <result column="times" property="times" jdbcType="VARCHAR" />
-    <result column="deleted" property="deleted" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <association property="users" javaType="com.hzyc.intstudio.entity.Users">
 	    	<result column="username" property="username"/>
     </association>
   </resultMap>
   <insert id="insert" parameterType="com.hzyc.intstudio.entity.Orders" >
     insert into orders (id, userid, stockid, 
-      amount, times, deleted, 
+      amount, times, total, 
       price, status)
     values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{stockid,jdbcType=VARCHAR}, 
-      #{amount,jdbcType=VARCHAR}, #{times,jdbcType=VARCHAR}, #{deleted,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{times,jdbcType=VARCHAR}, #{total,jdbcType=VARCHAR}, 
       #{price,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hzyc.intstudio.entity.Orders" >
@@ -50,8 +51,8 @@
       <if test="times != null" >
         times,
       </if>
-      <if test="deleted != null" >
-        deleted,
+      <if test="total != null" >
+        total,
       </if>
       <if test="price != null" >
         price,
@@ -76,8 +77,8 @@
       <if test="times != null" >
         #{times,jdbcType=VARCHAR},
       </if>
-      <if test="deleted != null" >
-        #{deleted,jdbcType=VARCHAR},
+      <if test="total != null" >
+        #{total,jdbcType=VARCHAR},
       </if>
       <if test="price != null" >
         #{price,jdbcType=VARCHAR},
@@ -88,6 +89,6 @@
     </trim>
   </insert>
   <select id="queryAll" parameterType="String" resultMap="SelResultMap">
-  	select o.*,u.username from orders o,users u where u.id = o.userid where u.id =#{uid}
+  	SELECT o.*,u.username,s.name FROM orders o,users u ,stock s WHERE u.id = o.userid AND s.code = o.stockid AND u.id =#{0} and o.status = #{1}
   </select>
 </mapper>

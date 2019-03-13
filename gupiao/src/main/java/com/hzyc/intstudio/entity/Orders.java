@@ -1,5 +1,9 @@
 package com.hzyc.intstudio.entity;
 
+/**
+ * @author asus
+ *
+ */
 public class Orders {
     private String id;
 
@@ -11,7 +15,7 @@ public class Orders {
 
     private String times;
 
-    private String deleted;
+    private String total;
 
     private String price;
 
@@ -19,6 +23,7 @@ public class Orders {
 
     private Users users;
 
+    private String name;
 	public Users getUsers() {
 		return users;
 	}
@@ -68,13 +73,21 @@ public class Orders {
         this.times = times == null ? null : times.trim();
     }
 
-    public String getDeleted() {
-        return deleted;
-    }
+	public String getTotal() {
+		return total;
+	}
 
-    public void setDeleted(String deleted) {
-        this.deleted = deleted == null ? null : deleted.trim();
-    }
+	public void setTotal(String total) {
+		this.total = total;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getPrice() {
 		return price;

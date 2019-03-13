@@ -61,7 +61,7 @@ public class StockData {
 		this.shoupan = shoupan;
 	}
 	public String getCurrent() {
-		return current;
+		return format.format(new BigDecimal(current));
 	}
 	public void setCurrent(String current) {
 		this.current = current;

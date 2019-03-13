@@ -9,5 +9,5 @@ public interface OrdersMapper {
 
     int insertSelective(Orders record);
     
-    List<Orders> queryAll(String uid);
+    List<Orders> queryAll(String uid,String status);
 }
