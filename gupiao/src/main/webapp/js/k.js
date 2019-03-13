@@ -39,6 +39,10 @@ var vm = new Vue({
     },
     chongzhi(){
     	window.location.href="recharge.jsp";
+    },
+    tiaozhuan(){
+    	var code = document.getElementById("code").value;
+    	window.location.href="buy.jsp?code='" + code + "'";
     }
   }
 })

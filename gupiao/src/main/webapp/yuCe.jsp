@@ -17,7 +17,7 @@
 </head>
 <body>
   <div id="record">
-    <mt-header title="股票预测" style="background:#f4f6fa;color:#000;height:50px;">
+    <mt-header title="股票预测(可点击购买)" style="background:#f4f6fa;color:#000;height:50px;">
       <!-- <a href="getAllData" slot="left"></router-link>
         <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
       </a> -->
@@ -36,7 +36,7 @@
     <div class="record-list" :style="{height:curHeight}">
     <span style="visibility:hidden;color:red;margin-left:20px;" id="noJL">请在换一拨！</span>
       <div class="item" v-for="(item, index) in lists" :key="index">
-        <div class="box">
+        <div class="box" @click="tiaozhuan(item.code)">
           <div>
             <div class="title">名称:{{ item.name }}</div><br>
             <div class="data">代码:{{ item.code }}</div>
@@ -106,7 +106,9 @@
         this.curHeight =h - 50 + 'px';
       },
       methods: {
-
+		tiaozhuan(code){
+			window.location.href="buy.jsp?code='" + code.substring(3) + "'";
+		}
       }
     })
   </script>

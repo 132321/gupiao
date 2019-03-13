@@ -67,7 +67,7 @@
       <mt-button size="small" @click.native.prevent="active = 'tab-container2'">周图</mt-button>
       <mt-button size="small" @click.native.prevent="active = 'tab-container3'">月图</mt-button>
     </div>
-    
+    <input type="hidden" value="<%=id.substring(2)%>" id="code">
     <div class="page-tab-container">
       <mt-tab-container class="page-tabbar-tab-container" v-model="active" swipeable>
         <mt-tab-container-item id="tab-container1">
@@ -101,7 +101,7 @@
     </div>
     <div style="width:100%;height:100px"></div>
 
-	<mt-button type="danger" style="width:100%;;position:fixed;bottom:0px;left:0">模拟买入</mt-button>
+	<mt-button type="danger" style="width:100%;;position:fixed;bottom:0px;left:0" @click="tiaozhuan">模拟买入</mt-button>
   </div>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/mint-ui/lib/index.js"></script>

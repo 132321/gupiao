@@ -109,7 +109,10 @@
 }
 </style>
 </head>
-<body>
+<%
+	String code = request.getParameter("code");
+%>
+<body onload="moren(<%=code%>)">
 	<div id="home1">
 		<mt-header title="首页"></mt-header>
 		<div style="width: 100%">
@@ -181,7 +184,7 @@
 		</div>
 		<div style="height: 100px; width: 100%"></div>
 		<div class="tabs" style="background-color: #fff">
-			<a href="home.html"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
+			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
 			</a> <a href="hangqing.html"> <i class="iconfont"
 				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
 			</a> <a href="yuce.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
@@ -213,6 +216,54 @@
 	<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
 </body>
 <script>
+function moren(x){
+	if (x != null) {
+		this.stockId = x;
+		 // var vm = this;
+		    var ajax4 = new XMLHttpRequest();
+		    ajax4.open('post', '/getStockData');
+		    ajax4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			//发送请求
+			 ajax4.send("stockId="+this.stockId);
+			 ajax4.onreadystatechange = function () {
+		         if(ajax4.readyState==4 && ajax4.status==200){
+		        	 var result = (ajax4.responseText);
+		    		 	var obj = eval('('+result+')');
+		    		if (obj == '') {
+		 		 	} else {
+		 		 		vm.price = (obj.current);
+		 		 		vm.stockId = x;
+		 		 		document.getElementById("sellmoney1").innerHTML = obj.sellmoney1;
+		 		 		document.getElementById("sellmoney2").innerHTML = obj.sellmoney2;
+		 		 		document.getElementById("sellmoney3").innerHTML = obj.sellmoney3;
+		 		 		document.getElementById("sellmoney4").innerHTML = obj.sellmoney4;
+		 		 		document.getElementById("sellmoney5").innerHTML = obj.sellmoney5;
+		 		 		
+		 		 		document.getElementById("sellmount1").innerHTML = obj.sellnum1;
+		 		 		document.getElementById("sellmount2").innerHTML = obj.sellnum2;
+		 		 		document.getElementById("sellmount3").innerHTML = obj.sellnum3;
+		 		 		document.getElementById("sellmount4").innerHTML = obj.sellnum4;
+		 		 		document.getElementById("sellmount5").innerHTML = obj.sellnum5;
+		 		 		
+		 		 		document.getElementById("buymoney1").innerHTML = obj.buymoney1;
+		 		 		document.getElementById("buymoney2").innerHTML = obj.buymoney2;
+		 		 		document.getElementById("buymoney3").innerHTML = obj.buymoney3;
+		 		 		document.getElementById("buymoney4").innerHTML = obj.buymoney4;
+		 		 		document.getElementById("buymoney5").innerHTML = obj.buymoney5;
+		 		 		
+		 		 		document.getElementById("buymount1").innerHTML = obj.sellnum1;
+		 		 		document.getElementById("buymount2").innerHTML = obj.sellnum2;
+		 		 		document.getElementById("buymount3").innerHTML = obj.sellnum3;
+		 		 		document.getElementById("buymount4").innerHTML = obj.sellnum4;
+		 		 		document.getElementById("buymount5").innerHTML = obj.sellnum5;
+		 		 		
+		 		 		
+		 		 		
+		 		 	}
+				 }
+			 }
+	}
+}
 var vm = new Vue({
 	  el: '#home1',
 	  
@@ -250,7 +301,6 @@ var vm = new Vue({
 				 }
 		  },
 		  returnCode(x){
-			 
 			  this.stockId = x;
 			 // var vm = this;
 			    var ajax4 = new XMLHttpRequest();
