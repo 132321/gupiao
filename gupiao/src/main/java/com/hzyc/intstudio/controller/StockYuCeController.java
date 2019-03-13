@@ -13,12 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hzyc.intstudio.entity.Users;
 import com.hzyc.intstudio.entity.YuCe;
 import com.hzyc.intstudio.util.JDBCTools;
 
@@ -158,6 +159,42 @@ public class StockYuCeController {
 			return null;
 		}
 		return yList;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/maichu")
+	public boolean maichu(HttpServletRequest request) {
+		
+		boolean flag = false;
+		Users users = null;
+		try {
+			String code = request.getParameter("code");
+			int num = Integer.parseInt(request.getParameter("num"));
+			HttpSession session = request.getSession();
+			if (session.getAttribute("users") != null && session.getAttribute("users") != "") {
+				users = (Users) session.getAttribute("users");
+				JDBCTools jt = new JDBCTools();
+				String sql = "SELECT * FROM orders t WHERE t.userid = '" + users.getId() + "' AND t.stockid = '" + code
+						+ "'";
+				List<HashMap<String, String>> stockList = jt.find(sql);
+				if (stockList != null && stockList.size() > 0) {
+					for (int i = 0; i < stockList.size(); i++) {
+						// 1买
+						if ("1".equals(stockList.get(i).get("status"))) {
+							num -= Integer.parseInt(stockList.get(i).get("amount"));
+						} else {
+							num += Integer.parseInt(stockList.get(i).get("amount"));
+						}
+					}
+				}
+				if (num <= 0) {
+					flag = true;
+				}
+			} 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return flag;
 	}
 	
 }
