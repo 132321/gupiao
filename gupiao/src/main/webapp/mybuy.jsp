@@ -47,7 +47,7 @@
     		for(Orders o : orders){
       		%>
       			
-      		  <mt-cell title="<%=o.getStockid()%>-<%=o.getName()%>" is-link label="数量<%=o.getAmount()%>,单价<%=o.getPrice()%>,合计<%=o.getTotal()%>" style="border-top: 1px solid #f2f3f7;padding: 0 10px;" onclick="javascript:window.location.href='order.jsp?url=my.jsp'">
+      		  <mt-cell title="<%=o.getStockid()%>-<%=o.getName()%>" is-link label="数量<%=o.getAmount()%>,单价<%=o.getPrice()%>,合计<%=o.getTotal()%>" style="border-top: 1px solid #f2f3f7;padding: 0 10px;">
 		        <img slot="icon" src="./img/chaxun.jpg" width="24" height="24" style="margin-right:15px;">
 		      </mt-cell>
       		

@@ -1,6 +1,8 @@
 package com.hzyc.intstudio.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,11 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hzyc.intstudio.entity.Comments;
 import com.hzyc.intstudio.entity.Users;
 import com.hzyc.intstudio.service.IUserService;
+import com.hzyc.intstudio.util.JDBCTools;
 
 @Controller
 public class UserController {
@@ -169,5 +174,25 @@ public class UserController {
 		boolean flag = userService.selectByTel(users, request);
 		modelAndView.setViewName("redirect:loginorregist.jsp");
 		return modelAndView;
+	}
+	
+	/**
+	 *   我的
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "mine", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String,String> mine( HttpServletRequest request) {
+		Users users  = (Users)request.getSession().getAttribute("users");
+		String sql = "select money from users where id = "+users.getId();
+		JDBCTools jt = new JDBCTools();
+		ArrayList<HashMap<String,String>> alhs = jt.find(sql);
+		if(alhs != null && alhs.size() > 0) {
+			return alhs.get(0);
+		}else {
+			return null;
+		}
 	}
 }

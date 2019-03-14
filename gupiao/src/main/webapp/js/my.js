@@ -6,13 +6,14 @@ var vm = new Vue({
       id: 'Tmfnnfknkjk',
       rmb: '0',
       userlogo:'img/cat.jpg',
-      errorImg: 'this.src="img/cat.jpg"'
+      errorImg: 'this.src="img/cat.jpg"',
+      money:''
     }
   },
   mounted(){
-	 /*var vm = this;
+	 var vm = this;
 	  var ajax = new XMLHttpRequest();
-	 ajax.open('post', '/jzx/mine' );
+	 ajax.open('post', '/mine' );
 	 ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	//发送请求
 	 ajax.send(null);
@@ -23,13 +24,14 @@ var vm = new Vue({
 		    	alert("登录已超时");
 		    	window.location.href="login.jsp";
 		    }
-		 	var obj = eval("("+flag+")");  
-		 	vm.name = (obj.username);
-		 	vm.id = (obj.id);
+		 	var obj = eval("("+flag+")");
+		 	console.log(obj);
+		 	vm.money = (obj.money);
+		 	/*vm.id = (obj.id);
 		 	vm.rmb = (obj.money);
-		 	vm.userlogo = 'images/'+ obj.username+'.jpg';
+		 	vm.userlogo = 'images/'+ obj.username+'.jpg';*/
 		 }
-	 }  */
+	 } 
   },
   methods: {
     btn() {
@@ -38,7 +40,7 @@ var vm = new Vue({
     cancel(){
     	if(confirm('确认退出登录吗?')){
     		this.$toast('正在注销...');
-    		window.location.href="logout";
+    		window.location.href="logOut";
     	}
     },
     chongzhi(){
