@@ -69,7 +69,7 @@ public class StockDataController {
 	public List<HashMap<String,String>> selNameByStockId(HttpServletRequest request) {
 		String stockId = request.getParameter("stockId");
 		JDBCTools jt = new JDBCTools();
-		String sql = "select * from stock where code like '%"+stockId+"%'";
+		String sql = "select * from stock where code like '%"+stockId+"%' or name like '%"+stockId+"%'";
 		List<HashMap<String,String>> stockList = jt.find(sql);
 		return stockList;
 	}

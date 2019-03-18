@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <% String id = request.getParameter("id"); %>
+    <% String id = request.getParameter("id"); 
+     String name = request.getParameter("name");
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,6 +62,8 @@
 <mt-header title="股票走势" style="background: #f4f6fa;color:#000;height:50px;">
       <a href="getAllData" slot="left">
         <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
+        <input type="hidden" id="id" value="<%=id %>"/>
+        <input type="hidden" id="name" value="<%=name %>"/>
       </a>
     </mt-header>
 <div class="nav">
@@ -99,7 +103,30 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-    <div style="width:100%;height:100px"></div>
+    <div id="record">
+    <div class="record-list" :style="{height:curHeight}">
+    <span style="visibility:hidden;color:red;margin-left:20px;" id="noJL">请在换一拨！</span>
+      <div class="item" v-for="(item, index) in lists" :key="index">
+        <div @click="tiaozhuan(item.code)">
+          <div>
+            <div class="title">{{ item.name }}预测</div><br>
+          </div>
+          <div class="item" v-if=" item.yuce  > 0 && item.yuce < 1" >
+           		<div class="title" style="color:#f00">预计上升:+{{ item.yuce }}</div>
+           </div>
+          <div class="item" v-if=" item.yuce  >= 1" >
+           		<div class="rmb" style="color:#f00">建议购买:+{{ item.yuce }}<i class="iconfont" style="color: #9c9a9a;">&#xe73a;</i></div>
+           </div>
+           <div class="item" v-if=" item.yuce  == 0" >
+           		<div class="title" style="color:yellow">比较平稳，不建议购买</div>
+           </div>
+           <div class="item" v-if=" item.yuce  < 0" >
+           		<div class="title" style="color:#0f0">预计下降:{{ item.yuce }}</div>
+           </div>
+        </div>
+      </div>
+    </div>
+    </div>
 
 	<mt-button type="danger" style="width:100%;;position:fixed;bottom:0px;left:0" @click="tiaozhuan">模拟买入</mt-button>
   </div>
@@ -108,3 +135,4 @@
   <script src="./js/k.js"></script>
 </body>
 </html>
+

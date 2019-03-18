@@ -102,11 +102,12 @@ public class StockDataImpl {
 	                String data = "";
 	                for(int i = 0;i<temp.length-1;i++) {
 	                	//截取股票代码
-	                	String id = temp[i].substring(temp[i].lastIndexOf("_")+1, temp[i].lastIndexOf("="));
+	                	String id = temp[i].substring(temp[i].lastIndexOf("_")+3, temp[i].lastIndexOf("="));
 	                	//截取数据
 	                	data = temp[i].substring(temp[i].indexOf("\"")+1, temp[i].lastIndexOf("\""));
 	                	if(!data.equals("")) {
 	                		String[] temp2 = data.split(",");
+	                		sd.setId(id);
 	                		sd.setName(temp2[0]);
 	                		sd.setKaipan(temp2[1]);
 	                		sd.setShoupan(temp2[2]);

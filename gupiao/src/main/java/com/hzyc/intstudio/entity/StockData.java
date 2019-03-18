@@ -7,8 +7,21 @@ import java.text.DecimalFormat;
  * @author asus
  *
  */
+/**
+ * @author asus
+ *
+ */
+/**
+ * @author asus
+ *
+ */
+/**
+ * @author asus
+ *
+ */
 public class StockData {
 
+	private String id;
 	private String name;
 	private String kaipan;
 	private String shoupan;
@@ -42,6 +55,13 @@ public class StockData {
 	private String date;
 	private String time;
 	DecimalFormat format = new DecimalFormat("0.00");
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

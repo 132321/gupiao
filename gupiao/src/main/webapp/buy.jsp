@@ -114,7 +114,11 @@
 %>
 <body onload="moren(<%=code%>)">
 	<div id="home1">
-		<mt-header title="首页"></mt-header>
+		  <mt-header title="买入" style="background: #f4f6fa;color:#000;height:50px;">
+      <a href="getAllData" slot="left">
+        <mt-button icon="back" style="color:#1087ff;">返回</mt-button>
+      </a>
+    </mt-header>
 		<div style="width: 100%">
 			<div class="gird1" onclick="javascript:location.href='k.jsp">
 				<mt-popup v-model="popupVisible" position="bottom"></mt-popup>
@@ -180,8 +184,8 @@
 		<div style="height: 100px; width: 100%"></div>
 		<div class="tabs" style="background-color: #fff">
 			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
-			</a> <a href="hangqing.html"> <i class="iconfont"
-				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
+			</a> <a href="hangqing.jsp"> <i class="iconfont"
+				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">搜索</span>
 			</a> <a href="yuce.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
 				<span class="special">预测</span>
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>

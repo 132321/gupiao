@@ -74,7 +74,7 @@
 	<div style="width:100%">
 		<%for(int i = 0;i<miList.size();i++){
 		%>
-			<div class="gird" onclick="javascript:location.href='k.jsp?id=<%=miList.get(i).getId() %>' ">
+			<div class="gird" onclick="javascript:location.href='k.jsp?id=<%=miList.get(i).getId() %>&name=<%=miList.get(i).getName() %>' ">
 				<div class="name"><%=miList.get(i).getName() %></div>
 				<div class="price"><%=miList.get(i).getPrice() %></div>
 				<div class="lv">
@@ -92,8 +92,8 @@
 		<div style="height: 100px; width: 100%;background-color:#fff"></div>
 		<div class="tabs" style="background-color: #fff">
 			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
-			</a> <a href="hangqing.html"> <i class="iconfont"
-				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
+			</a> <a href="hangqing.jsp"> <i class="iconfont"
+				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">搜索</span>
 			</a> <a href="yuCe.jsp"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
 				<span class="special">预测</span>
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>

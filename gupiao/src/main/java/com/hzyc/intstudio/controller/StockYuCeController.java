@@ -104,6 +104,28 @@ public class StockYuCeController {
 		return yList;
 	}
 	
+	//获取数据
+		@ResponseBody
+		@RequestMapping(value="/yuCeEach")
+		public List<YuCe> getDataEach(HttpServletRequest request) {
+			
+			String stockId = request.getParameter("stockId");
+			String name = request.getParameter("name");
+			stockId = stockId.replace("sh", "cn_");
+			List<YuCe> yList = new ArrayList<YuCe>();
+			YuCe yuCe = new YuCe();
+			yuCe.setName(name);
+			yuCe.setCode(stockId);
+			yList.add(yuCe);
+	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    	Date date = new Date();
+	    	Calendar calendar = Calendar.getInstance();
+    		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - 6);
+	        Date today = calendar.getTime(); 
+			yList = diaoyong(sdf.format(today), sdf.format(date), stockId, yList);
+			return yList;
+		}
+		
 	public static List<YuCe> diaoyong(String start, String end, String code, List<YuCe> yuList) {
 		URL ur = null;
 		List<YuCe> yList = new ArrayList<YuCe>();

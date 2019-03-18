@@ -60,8 +60,8 @@
     <div class="tabs" style="background-color: #fff">
 			<a href="getAllData"> <i style="color: #9c9a9a;" class="iconfont">&#xe73e;</i></br> 
 			<span class="special">首页</span>
-			</a> <a href="hangqing.html"> <i class="iconfont"
-				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">行情</span>
+			</a> <a href="hangqing.jsp"> <i class="iconfont"
+				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">搜索</span>
 			</a> <a href="yuCe.jsp"> <i class="iconfont" >&#xe624;</i></br>
 				<span >预测</span>
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
