@@ -127,9 +127,9 @@
 		</div>
 		<div style="height: 100px; width: 100%"></div>
 		<div class="tabs" style="background-color: #fff">
-			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
+			<a href="getAllData"> <i class="iconfont" style="color: #9c9a9a;">&#xe73e;</i></br> <span class="special">首页</span>
 			</a> <a href="hangqing.jsp"> <i class="iconfont"
-				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">搜索</span>
+				>&#xe682;</i></br> <span >搜索</span>
 			</a> <a href="yuce.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe624;</i></br>
 				<span class="special">预测</span>
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
@@ -229,7 +229,7 @@ var vm = new Vue({
 			    		 	var obj = eval('('+result+')');
 			    		if (obj == '') {
 			 		 	} else {
-			 		 		window.location.href="sousuo.jsp?code="+obj.id+"&name="+obj.name;
+			 		 		window.location.href="k.jsp?id=sh"+obj.id+"&name="+obj.name;
 			 		 	}
 					 }
 				 }

@@ -182,7 +182,7 @@
 			</div>
 		</div>
 		<div style="height: 100px; width: 100%"></div>
-		<div class="tabs" style="background-color: #fff">
+		<!-- <div class="tabs" style="background-color: #fff">
 			<a href="getAllData"> <i class="iconfont">&#xe73e;</i></br> <span>首页</span>
 			</a> <a href="hangqing.jsp"> <i class="iconfont"
 				style="color: #9c9a9a;">&#xe682;</i></br> <span class="special">搜索</span>
@@ -191,7 +191,7 @@
 			</a> <a href="my.html"> <i class="iconfont" style="color: #9c9a9a;">&#xe501;</i></br>
 				<span class="special">我的</span>
 			</a>
-		</div>
+		</div> -->
 	
 	<template style="width:100%;height:300px;">
 		<div style="width:100%;height:300px;">
